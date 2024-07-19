@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 
 function Protected({ children, authentication }) {
     const navigate = useNavigate()
-    const authStatus = useSelector((state) => state.auth.status)
+    const authStatus = useSelector((state) => state.auth.authStatus)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         setLoading(true)
         if (authentication && authStatus !== authentication) {
-            navigate('/login')
+            navigate('/signin')
         } else if (!authentication && authStatus !== authentication) {
             navigate('/')
         }

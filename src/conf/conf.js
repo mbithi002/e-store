@@ -9,3 +9,5 @@ const conf = {
   appwriteCategoriesCid: String(import.meta.VITE_APPWRITE_CATEGORIES_CID),
   appwriteProductsCid: String(import.meta.VITE_APPWRITE_PRODUCTS_CID),
 };
+
+export default conf;

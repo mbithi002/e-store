@@ -4,13 +4,70 @@ import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
+import {
+  Cart,
+  Home,
+  Orders,
+  Product,
+  SearchProduct,
+  Shop,
+  SignIn,
+  Signup
+} from './pages/pages.js'
 import store from './store/store.js'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    children: []
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/signin',
+        element: (
+          <SignIn />
+        )
+      },
+      {
+        path: '/signup',
+        element: (
+          <Signup />
+        )
+      },
+      {
+        path: '/shop',
+        element: (
+          <Shop />
+        )
+      },
+      {
+        path: '/search',
+        element: (
+          <SearchProduct />
+        )
+      },
+      {
+        path: '/product/:slug',
+        element: (
+          <Product />
+        )
+      },
+      {
+        path: '/orders',
+        element: (
+          <Orders />
+        )
+      },
+      {
+        path: '/cart',
+        element: (
+          <Cart />
+        )
+      },
+    ]
   }
 ])
 
