@@ -1,4 +1,4 @@
-import Cart from "./Cart";
+import Cart from "./cart/Cart";
 import Header from "./header/Header";
 import Home from "./Home";
 import Orders from "./Orders";
