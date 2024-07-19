@@ -36,5 +36,17 @@ const Contact = ({ h = "24px", w = "24px", c = "#232323" }) => {
   )
 }
 
-export { Contact, Package, Paid, Return, Support };
+const Menu = ({ h = "24px", w = "24px", c = "#232323" }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" height={h} viewBox="0 -960 960 960" width={w} fill={c}><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg>
+  )
+}
+
+const Close = ({ h = "24px", w = "24px", c = "#232323" }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" height={h} viewBox="0 -960 960 960" width={w} fill={c}><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg>
+  )
+}
+
+export { Close, Contact, Menu, Package, Paid, Return, Support };
 

@@ -1,8 +1,11 @@
 import React from 'react'
+import { SearchComponent } from '../components/components'
 
 function SearchProduct() {
     return (
-        <div>SearchProduct</div>
+        <>
+            <SearchComponent />
+        </>
     )
 }
 
