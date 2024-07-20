@@ -29,10 +29,10 @@ const Shop = () => {
                 <div className="container min-w-[100vw] bg-gray-200">
                     <div className="flex flex-row">
                         {sideBar && (
-                            <div className={`side-bar w-[18rem] h-screen bg-gray-700 ${sideBarClass} px-2`}>
+                            <div className={`side-bar w-[18rem] h-[inherit] bg-gray-700 ${sideBarClass} px-2`}>
                                 <div className="flex flex-col justify-start items-center relative">
                                     <div onClick={() => setSideBar(false)} className="absolute top-1 right-1 cursor-pointer">
-                                        <CloseIcon w='40px' h='40px' c='#fff' />
+                                        <CloseIcon w='32px' h='32px' c='#fff' />
                                     </div>
                                     <h1 className="text-white text-2xl font-bold self-start my-2">Categories</h1>
                                     <button className="w-full p-1 text-start bg-gray-200 my-2">
@@ -70,10 +70,18 @@ const Shop = () => {
                         )}
                         <div className={`display w-full min-h-screen relative ${displayClass}`}>
                             <div onClick={() => setSideBar(!sideBar)} className="cursor-pointer absolute z-30 top-2 left-4">
-                                {sideBar ? '' : <MenuIcon w='32px' h='32px' />}
+                                {sideBar ? '' : <MenuIcon w='28px' h='28px' />}
                             </div>
-                            <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 items-center">
-                                <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three' />
+                            <p className="text-center text-2xl font-semibold my-1">Skin Care</p>
+                            <div className="grid md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2 items-center">
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,9 @@ const Contact = ({ h = "24px", w = "24px", c = "#232323" }) => {
 
 const Menu = ({ h = "24px", w = "24px", c = "#232323" }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" height={h} viewBox="0 -960 960 960" width={w} fill={c}><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg>
+    <div className="p-2 flex items-center justify-center rounded-[50%] bg-white border border-gray-800">
+      <svg xmlns="http://www.w3.org/2000/svg" height={h} viewBox="0 -960 960 960" width={w} fill={c}><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg>
+    </div>
   )
 }
 
