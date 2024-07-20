@@ -3,6 +3,7 @@ import Signup from "./auth/Signup";
 import Cart from "./cart/Cart";
 import Header from "./header/Header";
 import Home from "./home/Home";
+import WifiLoader from "./loaders/WifiLoader";
 import ProductModal from "./modals/ProductModal";
 import Orders from "./orders/Orders";
 import Search from "./search/Search";
@@ -15,6 +16,7 @@ export {
     Orders as OrdersComponent, ProductModal as ProductModalComponent, Search as SearchComponent,
     Shop as ShopComponent,
     Signin as SigninComponent,
-    Signup as SignupComponent
+    Signup as SignupComponent,
+    WifiLoader as WifiLoaderComponent
 };
 

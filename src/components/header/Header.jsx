@@ -1,6 +1,25 @@
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import userService from '../../appwrite/userAuth'
+import { logout } from '../../features/auth/authSlice'
 
 function Header() {
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState()
+    const { userData } = useSelector((state) => state.auth)
+
+
+    const handleLogout = async () => {
+        try {
+            const response = await userService.logout()
+            if (response) {
+                dispatch(logout())
+            }
+        } catch (error) {
+
+        }
+    }
 
     return (
         <header className="sm:block hidden">
@@ -40,8 +59,16 @@ function Header() {
                         </form>
                     </Link>
                     <div className="flex flex-row items-center justify-evenly">
-                        <Link to={'/signup'}><button className="py-1 px-3 bg-black text-white font-semibold text-lg rounded-md">Sign-up</button></Link>
-                        <Link to={'/signin'}><button className="py-1 px-3 bg-gray-300 text-gray-900 font-semibold text-lg rounded-md ml-3">Sign-in</button></Link>
+                        {
+                            userData ? (
+                                <div className=""></div>
+                            ) : (
+                                <>
+                                    <Link to={'/signup'}><button className="py-1 px-3 bg-black text-white font-semibold text-lg rounded-md">Sign-up</button></Link>
+                                    <Link to={'/signin'}><button className="py-1 px-3 bg-gray-300 text-gray-900 font-semibold text-lg rounded-md ml-3">Sign-in</button></Link>
+                                </>
+                            )
+                        }
                     </div>
                 </div>
             </div>

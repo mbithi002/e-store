@@ -57,8 +57,10 @@ class UserService {
     }
   }
 
-  async loginEmail(email, password) {
+  async loginEmail({ email, password }) {
     try {
+      console.log(conf.appwriteUrl);
+      console.log(conf.appwriteCartCid);
       const session = await this.account.createEmailPasswordSession(
         email,
         password
@@ -82,6 +84,19 @@ class UserService {
       return false;
     } catch (error) {
       console.log("appwriteUserService :: logout() :: ", error);
+      throw error;
+    }
+  }
+
+  async getCurrentUser() {
+    try {
+      const response = await this.account.get();
+      if (response) {
+        return response;
+      }
+      return false;
+    } catch (error) {
+      console.log("appwriteUserService :: getCurrentUser() :: ", error);
       throw error;
     }
   }
