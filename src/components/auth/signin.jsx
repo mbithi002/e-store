@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../appwrite/userAuth';
-import { login as storeLogin } from '../../features/auth/authSlice';
+import { login as authLogin } from '../../features/auth/authSlice';
 import WifiLoader from '../loaders/WifiLoader';
 
 const Signin = () => {
@@ -19,10 +19,9 @@ const Signin = () => {
         try {
             const session = await userService.loginEmail(data)
             if (session) {
-                setLoading(false)
                 const userData = await userService.getCurrentUser()
                 if (userData) {
-                    dispatch(storeLogin({ userData }))
+                    dispatch(authLogin({ userData }))
                     navigate('/')
                 }
             }

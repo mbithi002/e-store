@@ -8,6 +8,7 @@ const conf = {
   appwriteOrdersCid: String(import.meta.env.VITE_APPWRITE_ORDERS_CID),
   appwriteCategoriesCid: String(import.meta.env.VITE_APPWRITE_CATEGORIES_CID),
   appwriteProductsCid: String(import.meta.env.VITE_APPWRITE_PRODUCTS_CID),
+  appwriteUsersCid: String(import.meta.env.VITE_APPWRITE_USERS_CID),
 };
 
 export default conf;

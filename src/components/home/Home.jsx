@@ -1,6 +1,7 @@
 import React from 'react'
 import { Contact as ContactIcon, Package as PackageIcon, Paid as PaidIcon, Return as ReturnIcon, Support as SupportIcon } from '../../assets/google/google'
 import FeaturedProducts from './FeaturedProducts'
+import Socials from './Socials'
 
 function Home() {
     return (
@@ -79,19 +80,8 @@ function Home() {
                         <p className="text-gray-700">Email: info@havenbeauty.com</p>
                     </div>
                     <div className="mx-auto p-5">
-                        <p className="text-xl font-semibold text-black">Follow Us <i class="fa-solid fa-user-plus"></i></p>
-                        <p className="text-gray-700">
-                            <a href="https://facebook.com" className="hover:text-blue-500">Facebook <i class="fa-brands fa-facebook-f"></i></a>
-                        </p>
-                        <p className="text-gray-700">
-                            <a href="https://instagram.com" className="hover:text-pink-500">Instagram <i class="fa-brands fa-instagram"></i></a>
-                        </p>
-                        <p className="text-gray-700">
-                            <a href="https://twitter.com" className="hover:text-blue-400">Twitter <i class="fa-brands fa-twitter"></i></a>
-                        </p>
-                        <p className="text-gray-700">
-                            <a href="https://pinterest.com" className="hover:text-red-500">Pinterest <i class="fa-brands fa-pinterest-p"></i></a>
-                        </p>
+                        <Socials />
+                        <p className="text-xl font-semibold text-black text-center my-3">Follow Us <i class="fa-solid fa-user-plus"></i></p>
                     </div>
                 </div>
 

@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import './App.css'
-import { HeaderComponent } from './components/components'
+import React from "react";
+import { Outlet } from 'react-router-dom';
+import './App.css';
+import { HeaderComponent } from './components/components';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
   return (
     <div className="min-w-full min-h-screen bg-transparent">

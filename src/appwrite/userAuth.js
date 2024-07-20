@@ -1,15 +1,17 @@
-import { Account, Client, ID } from "appwrite";
+import { Account, Client, Databases, ID } from "appwrite";
 import conf from "../conf/conf";
 
 class UserService {
   client = new Client();
   account;
+  database;
 
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.account = new Account(this.client);
+    this.database = new Databases(this.client);
   }
 
   async createPhoneAccount(phone) {
@@ -19,7 +21,6 @@ class UserService {
         const userId = token.userId;
         return userId;
       }
-      return false;
     } catch (error) {
       console.log("appwriteUserService :: createPhoneAccount() :: ", error);
       throw error;
@@ -32,28 +33,40 @@ class UserService {
       if (session) {
         return session;
       }
-      return false;
     } catch (error) {
       console.log("appwriteUserService :: loginPhone() :: ", error);
       throw error;
     }
   }
-
-  async createEmailAccount(name, email, password) {
+  async createEmailAccount({ name, email, phone, password }) {
     try {
       const response = await this.account.create(
         ID.unique(),
-        name,
         email,
-        password
+        password,
+        name
       );
+
       if (response) {
+        await this.account.createEmailPasswordSession(email, password);
+
+        const userId = response.$id;
+        await this.database.createDocument(
+          conf.appwriteDatabaseId,
+          conf.appwriteUsersCid,
+          userId,
+          {
+            phone: Number(phone),
+            name: name,
+            email: email,
+            userId: userId,
+          }
+        );
         return response;
       }
-      return false;
     } catch (error) {
       console.log("appwriteUserService :: createEmailAccount() :: ", error);
-      throw error;
+      return false;
     }
   }
 
@@ -68,7 +81,6 @@ class UserService {
       if (session) {
         return session;
       }
-      return false;
     } catch (error) {
       console.log("appwriteUserService :: loginEmail() :: ", error);
       throw error;
@@ -81,7 +93,6 @@ class UserService {
       if (response) {
         return response;
       }
-      return false;
     } catch (error) {
       console.log("appwriteUserService :: logout() :: ", error);
       throw error;
@@ -94,7 +105,6 @@ class UserService {
       if (response) {
         return response;
       }
-      return false;
     } catch (error) {
       console.log("appwriteUserService :: getCurrentUser() :: ", error);
       throw error;

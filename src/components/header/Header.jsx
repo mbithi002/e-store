@@ -1,25 +1,7 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import userService from '../../appwrite/userAuth'
-import { logout } from '../../features/auth/authSlice'
+import UserActions from './UserActions'
 
 function Header() {
-    const dispatch = useDispatch()
-    const [loading, setLoading] = useState()
-    const { userData } = useSelector((state) => state.auth)
-
-
-    const handleLogout = async () => {
-        try {
-            const response = await userService.logout()
-            if (response) {
-                dispatch(logout())
-            }
-        } catch (error) {
-
-        }
-    }
 
     return (
         <header className="sm:block hidden">
@@ -38,7 +20,7 @@ function Header() {
                         </nav>
                     </div>
                     <Link to={'/search'}>
-                        <form className="flex relative items-center -ml-10 w-[300px] h-[40px] px-3 rounded-full bg-gray-400 transition-all duration-500 focus-within:rounded-sm">
+                        <form className="flex relative items-center -ml-[6rem] w-[360px] h-[40px] px-3 rounded-full bg-gray-400 transition-all duration-500 focus-within:rounded-sm">
                             <button className="border-none bg-none text-white">
                                 <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
                                     <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" strokeWidth="1.333" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -58,17 +40,8 @@ function Header() {
                             <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#2f2ee9] transform scale-x-0 transition-transform duration-300 ease-in-out origin-center form-focus:scale-x-100"></div>
                         </form>
                     </Link>
-                    <div className="flex flex-row items-center justify-evenly">
-                        {
-                            userData ? (
-                                <div className=""></div>
-                            ) : (
-                                <>
-                                    <Link to={'/signup'}><button className="py-1 px-3 bg-black text-white font-semibold text-lg rounded-md">Sign-up</button></Link>
-                                    <Link to={'/signin'}><button className="py-1 px-3 bg-gray-300 text-gray-900 font-semibold text-lg rounded-md ml-3">Sign-in</button></Link>
-                                </>
-                            )
-                        }
+                    <div className="">
+                        <UserActions />
                     </div>
                 </div>
             </div>
