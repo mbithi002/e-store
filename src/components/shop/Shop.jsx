@@ -3,7 +3,7 @@ import { Close as CloseIcon, Menu as MenuIcon } from '../../assets/google/google
 import ProductCard from './ProductCard';
 
 const Shop = () => {
-    const [sideBar, setSideBar] = useState(true);
+    const [sideBar, setSideBar] = useState(false);
     const [sideBarClass, setSideBarClass] = useState('');
     const [displayClass, setDisplayClass] = useState('');
     const [category, setCategory] = useState('')

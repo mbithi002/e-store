@@ -12,7 +12,7 @@ const Cart = () => {
   return (
     <>
       <div className="sm:mt-[4rem]">
-        <div className="text-center text-gray-700 text-2xl font-bold">Your Cart</div>
+        <div className="text-center text-gray-700 text-2xl font-bold my-2 pt-2">Your Cart <i class="fa-solid fa-cart-shopping"></i></div>
         <div className="container w-full h-full">
           <div className="grid grid-cols-12">
             <div className="col-span-12 sm:col-span-8">
@@ -25,12 +25,15 @@ const Cart = () => {
                 </tr>
                 {
                   cartContent.map((item) => (
-                    <tr className="w-full mx-3">
-                      <td key={item.productId} className="hover:bg-gray-100 transition-all duration-100 cursor-pointer overflow-hidden w-[24rem] p-2 h-[8rem] flex flex-row items-start mb-1 py-2">
-                        <img src={item.image} alt="image" className="max-h[inherit] w-[6rem] object-cover mr-2" />
+                    <tr className="w-full mx-3 shadow-lg rounded-md">
+                      <td key={item.productId} className="relative hover:bg-gray-100 transition-all duration-100 cursor-pointer overflow-hidden w-[24rem] p-2 h-[8rem] flex flex-row items-start mb-1 py-2">
+                        <img src={item.image} alt="image" className="max-h[inherit] w-[6rem] object-cover mr-2 hover:brightness-50 transition-all duration-200" />
                         <div className="flex flex-col pt-3 w-full h-full">
                           <p className="text-md mb-3 font-semibold">{item.name}</p>
                           <p className="text-sm">{item.description}</p>
+                        </div>
+                        <div className="absolute bottom-1 right-1 text-red-500 p-2">
+                          <i class="text-md fa-solid fa-trash"></i>
                         </div>
                       </td>
                       <td className="hover:bg-gray-100 transition-all duration-200 cursor-pointer w-auto text-center font-semibold text-md">{item.price}</td>
@@ -45,8 +48,8 @@ const Cart = () => {
                 }
               </table>
             </div>
-            <div className="sm:block w-full col-span-4 px-2">
-              <div className="bg-gray-100 p-2 rounded-md">
+            <div className="sm:block w-full col-span-4 bg-gray-100 px-2 pt-8">
+              <div className="bg-white p-4 rounded-md shadow-md">
                 <div className="flex flex-col justify-between">
                   <h2 className="text-2xl font-semibold mb-5 underline">Cart Summary</h2>
                   <p className="text-xl my-10 flex flex-row items-between"><span className="font-semibold block">Subtotal</span><span className="mx-2 text-sm font-semibolds p-2 border border-gray-400 rounded-md block">KSH: {cartTotal}</span></p>

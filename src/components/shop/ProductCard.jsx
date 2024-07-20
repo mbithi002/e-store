@@ -2,7 +2,7 @@ import React from 'react'
 
 function ProductCard({ image = 'image', name = 'product', description = '', price = 0, rating = 0, stock = 'in stock' }) {
   return (
-    <div className="card sm:w-[190px] w-[260px] sm:my-1 my-2 shadow-md h-[340px] p-2 m-2 bg-[#f5f5f5] relative overflow-visible shadow-md mx-auto">
+    <div className="card sm:w-[190px] w-[260px] sm:my-1 my-2 h-[340px] p-2 m-2 bg-[#f5f5f5] relative overflow-visible shadow-md mx-auto">
       <div className="card-img bg-[#ffcaa6] h-[60%] w-full rounded-md transition-all duration-300 ease-in-out">
         <img src={image} alt={image} className="object-cover w-full h-full rounded-md" />
       </div>
