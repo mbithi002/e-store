@@ -1,16 +1,11 @@
 import React from 'react'
+import OrderTable from './OrderTable'
+import { orders } from './orderItems'
 
 const Orders = () => {
     return (
         <>
-            <div className="sm:mt-[4rem]">
-                <div className="text-center text-black text-3xl">Your orders</div>
-                <table>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </table>
-            </div>
+            <OrderTable orderData={orders} />
         </>
     )
 }

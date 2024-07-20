@@ -19,7 +19,7 @@ function Header() {
                         </nav>
                     </div>
                     <Link to={'/search'}>
-                        <form className="relative flex items-center -ml-10 w-[300px] h-[40px] px-3 rounded-full bg-gray-400 transition-all duration-500 focus-within:rounded-sm">
+                        <form className="flex relative items-center -ml-10 w-[300px] h-[40px] px-3 rounded-full bg-gray-400 transition-all duration-500 focus-within:rounded-sm">
                             <button className="border-none bg-none text-white">
                                 <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
                                     <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" strokeWidth="1.333" strokeLinecap="round" strokeLinejoin="round"></path>
