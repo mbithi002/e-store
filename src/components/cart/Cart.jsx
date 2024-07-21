@@ -1,6 +1,8 @@
 import React from 'react';
+import useCart from '../../hooks/useCart';
 import { cartContent } from './cartContent';
 const Cart = () => {
+  const cart = useCart()
   const calculateTotal = () => {
     let total = 0;
     cartContent.forEach((item) => {
@@ -9,6 +11,8 @@ const Cart = () => {
     return total.toFixed(2)
   }
   const cartTotal = calculateTotal()
+  console.log(cart);
+
   return (
     <>
       <div className="sm:mt-[4rem]">

@@ -24,13 +24,7 @@ const Signup = () => {
                     dispatch(login({ userData }));
                     setLoading(false);
                     navigate('/');
-                } else {
-                    setLoading(false);
-                    setError("Failed to Sign-up");
                 }
-            } else {
-                setLoading(false);
-                setError("Failed to Sign-up");
             }
             setLoading(false);
         } catch (error) {

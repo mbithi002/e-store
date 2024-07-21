@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Close as CloseIcon, Menu as MenuIcon } from '../../assets/google/google';
+import useAllProducts from '../../hooks/useAllProducts';
 import ProductCard from './ProductCard';
 
 const Shop = () => {
@@ -7,6 +8,7 @@ const Shop = () => {
     const [sideBarClass, setSideBarClass] = useState('');
     const [displayClass, setDisplayClass] = useState('');
     const [category, setCategory] = useState('')
+    const [products, setProducts] = useState([]);
     const categories = [
         {
             bodyCare: ['moisturizers', 'cleansers', 'treatments', 'skincare', 'fragrance']
@@ -15,6 +17,8 @@ const Shop = () => {
     ]
 
     useEffect(() => {
+        const allProducts = useAllProducts()
+        setProducts(allProducts)
         if (sideBar) {
             setSideBarClass('slide-in');
             setDisplayClass('fade-in');
@@ -74,14 +78,21 @@ const Shop = () => {
                             </div>
                             <p className="text-center text-2xl font-semibold my-1">Skin Care</p>
                             <div className="grid md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2 items-center">
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
-                            <ProductCard image='https://i.pinimg.com/474x/09/2a/ff/092aff62be1ae73d697a3bc5f9612851.jpg' description='beauty product three thinidn enifien' />
+                                {
+                                    products.map((product) => (
+                                        <div className="" key={product.productId}>
+                                            <ProductCard
+                                                id={product.productId}
+                                                image={product.ProductImage}
+                                                productName={product.ProductName}
+                                                description={product.ProductDescription}
+                                                price={product.ProductPrice}
+                                                rating={product.ProductRating}
+                                                stock={product.stock ? 'in-stock' : 'Un-available'}
+                                            />
+                                        </div>
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>

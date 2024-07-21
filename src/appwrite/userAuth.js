@@ -66,7 +66,7 @@ class UserService {
       }
     } catch (error) {
       console.log("appwriteUserService :: createEmailAccount() :: ", error);
-      return false;
+      throw error;
     }
   }
 

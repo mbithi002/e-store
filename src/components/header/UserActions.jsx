@@ -20,7 +20,7 @@ const UserActions = () => {
             try {
                 if (!userData) {
                     const res = await userService.getCurrentUser();
-                    console.log(res);
+                    // console.log(res);
                     dispatch(login({ res }))
                 }
             } catch (error) {
