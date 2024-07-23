@@ -1,7 +1,7 @@
 // import { lineSpinner } from 'ldrs';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../appwrite/userAuth';
 import { login as authLogin } from '../../features/auth/authSlice';
@@ -15,6 +15,9 @@ const Signin = () => {
     const { register, handleSubmit } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { userData } = useSelector((state) => state.auth)
+
+    if (userData) navigate('/')
 
     const login = async (data) => {
         setError('')

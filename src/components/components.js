@@ -8,13 +8,13 @@ import WifiLoader from "./loaders/WifiLoader";
 import ProductModal from "./modals/ProductModal";
 import Orders from "./orders/Orders";
 import Search from "./search/Search";
+import ProductCard from "./shop/ProductCard";
 import Shop from "./shop/Shop";
 
 export {
     Cart as CartComponent,
     Header as HeaderComponent,
-    Home as HomeComponent, HoneycombLoader as HoneycombLoaderComponent, Orders as OrdersComponent,
-    ProductModal as ProductModalComponent,
+    Home as HomeComponent, HoneycombLoader as HoneycombLoaderComponent, Orders as OrdersComponent, ProductCard as ProductCardComponent, ProductModal as ProductModalComponent,
     Search as SearchComponent,
     Shop as ShopComponent,
     Signin as SigninComponent,

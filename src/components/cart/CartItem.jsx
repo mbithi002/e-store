@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteItemFromCart } from '../../features/user/cart/cartThunks';
+import { addToCart, deleteItemFromCart } from '../../features/user/cart/cartThunks';
 import CustomCheckbox from '../common/CustomCheckbox';
 
-const CartItem = ({ id = '', image = '', name = '', quantity = 1, description = '', price = 0 }) => {
-    const { userData } = useSelector((state) => state.auth)
+const CartItem = ({ id = '', image = '', name = '', count = 1, description = '', price = 0 }) => {
+    const { userData } = useSelector((state) => state.auth);
     const [checked, setChecked] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const handleRemoveFromCart = (productId) => {
-        dispatch(deleteItemFromCart({ userId: userData.$id, productId }))
-    }
+        dispatch(deleteItemFromCart({ userId: userData.$id, productId }));
+    };
 
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked);
     };
+
+    const handleAddToCart = (productId) => {
+        dispatch(addToCart({ userId: userData.$id, productId }));
+    };
+
     return (
         <div key={id} className="flex flex-col p-2 bg-gray-200 m-2 rounded-md shadow-lg">
             <div className="flex flex-row h-[9rem] py-2 relative">
@@ -28,22 +33,22 @@ const CartItem = ({ id = '', image = '', name = '', quantity = 1, description = 
                     <p className="text-sm p-1 mt-1 border border-black rounded-md">Ksh: <span className="font-bold">{price}</span></p>
                     <div className="flex w-full flex-row justify-between my-2">
                         <div onClick={() => handleRemoveFromCart(id)} className="cursor-pointer flex items-center">
-                            <i class="fa-solid fa-trash"></i>
+                            <i className="fa-solid fa-trash"></i>
                         </div>
                         <div className="flex flex-row items-center justify-around self-end">
-                            <button className="">
-                                <i class="fa-solid fa-plus mx-2"></i>
+                            <button onClick={() => handleAddToCart(id)} className="">
+                                <i className="fa-solid fa-plus mx-2"></i>
                             </button>
-                            <span className="underline">{quantity}</span>
-                            <button className="">
-                                <i class="fa-solid fa-minus mx-2"></i>
+                            <span className="">{count}</span>
+                            <button onClick={() => handleRemoveFromCart(id)} className="">
+                                <i className="fa-solid fa-minus mx-2"></i>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CartItem
+export default CartItem;

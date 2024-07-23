@@ -5,7 +5,7 @@ import { fetchCart } from '../../features/user/cart/cartThunks';
 import { fetchAllproducts } from '../../features/user/shop/productThunks';
 import CartItem from './CartItem';
 
-lineSpinner.register()
+lineSpinner.register();
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -21,20 +21,21 @@ const Cart = () => {
 
   useEffect(() => {
     if (cart && products) {
-      const filteredProducts = products.filter(product => cart.includes(product.$id));
-      setProductsInCart(filteredProducts);
+      const productCount = cart.reduce((acc, productId) => {
+        acc[productId] = (acc[productId] || 0) + 1;
+        return acc;
+      }, {});
+
+      const filteredProducts = products.filter(product => productCount[product.$id]);
+
+      const productsWithCount = filteredProducts.map(product => ({
+        ...product,
+        count: productCount[product.$id],
+      }));
+
+      setProductsInCart(productsWithCount);
     }
   }, [cart, products]);
-
-  if (!userData) {
-    return (
-      <div className="w-[100vw] h-full mt-[6rem]">
-        <p className="text-center text-2xl font-bold text-black my-auto">
-          Sign in to your account or sign up to use cart functionality
-        </p>
-      </div>
-    );
-  }
 
   if (fetching) {
     return (
@@ -49,15 +50,36 @@ const Cart = () => {
       </div>
     );
   }
-
   if (error) {
     return <div className="">{error}</div>;
   }
+  if (!userData) {
+    return (
+      <div className="w-[100vw] h-full mt-[6rem]">
+        <p className="text-center text-2xl font-bold text-black my-auto">
+          Sign in to your account or sign up to use cart functionality
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="sm:mt-[4rem]">
-      <div className="text-center text-gray-700 text-2xl font-bold my-2 pt-2">
-        Your Cart <i className="fa-solid fa-cart-shopping"></i>
+    <div className="sm:mt-[4.5rem] w-[inherit] px-3">
+      <div className="flex flex-row justify-between items-center px-3">
+        <div className="text-center text-gray-700 text-2xl font-bold my-2 pt-2">
+          Your Cart
+          <div className="relative inline-block p-1 rounded-lg">
+            <i className="fa-solid fa-cart-shopping text-3xl text-black"></i>
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+              {cart.length}
+            </span>
+          </div>
+        </div>
+        <div className="">
+          <button className="bg-red-500 text-white py-1 px-3 rounded-md ">
+            Clear cart <i className="fa-solid fa-shopping-cart"></i>
+          </button>
+        </div>
       </div>
       <div className="grid sm:grid-cols-3">
         {productsInCart.length < 1 ? (
@@ -73,6 +95,7 @@ const Cart = () => {
               description={product.productDescription}
               name={product.productName}
               price={product.productPrice}
+              count={product.count}
             />
           ))
         )}

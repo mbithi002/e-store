@@ -87,6 +87,23 @@ class UserConfig {
       throw error;
     }
   }
+
+  async clearCart(userId) {
+    try {
+      const res = await this.database.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteUsersCid,
+        userId,
+        {
+          cart: [],
+        }
+      );
+      return res;
+    } catch (error) {
+      console.log("userConfig :: clearCart() :: ", error);
+      throw error;
+    }
+  }
 }
 
 const userConfig = new UserConfig();

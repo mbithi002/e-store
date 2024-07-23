@@ -73,7 +73,7 @@ const Shop = () => {
                                 {sideBar ? '' : <MenuIcon w='28px' h='28px' />}
                             </div>
                             <p className="text-center text-2xl font-semibold my-1">Skin Care</p>
-                            <div className="grid md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2 items-center">
+                            <div className="grid md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2 items-center sm:px-4">
                                 <AllProducts />
                             </div>
                         </div>

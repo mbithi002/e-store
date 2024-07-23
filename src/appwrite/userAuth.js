@@ -1,41 +1,39 @@
-import { Account, Client, Databases, ID } from "appwrite";
-import conf from "../conf/conf";
+import { Account, Client, Databases, ID } from 'appwrite'
+import conf from '../conf/conf'
 
 class UserService {
-  client = new Client();
-  account;
-  database;
+  client = new Client()
+  account
+  database
 
   constructor() {
-    this.client
-      .setEndpoint(conf.appwriteUrl)
-      .setProject(conf.appwriteProjectId);
-    this.account = new Account(this.client);
-    this.database = new Databases(this.client);
+    this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId)
+    this.account = new Account(this.client)
+    this.database = new Databases(this.client)
   }
 
   async createPhoneAccount(phone) {
     try {
-      const token = await this.account.createPhoneToken(ID.unique(), phone);
+      const token = await this.account.createPhoneToken(ID.unique(), phone)
       if (token) {
-        const userId = token.userId;
-        return userId;
+        const userId = token.userId
+        return userId
       }
     } catch (error) {
-      console.log("appwriteUserService :: createPhoneAccount() :: ", error);
-      throw error;
+      console.log('appwriteUserService :: createPhoneAccount() :: ', error)
+      throw error
     }
   }
 
   async loginPhone(userId, secret) {
     try {
-      const session = await this.account.createSession(userId, secret);
+      const session = await this.account.createSession(userId, secret)
       if (session) {
-        return session;
+        return session
       }
     } catch (error) {
-      console.log("appwriteUserService :: loginPhone() :: ", error);
-      throw error;
+      console.log('appwriteUserService :: loginPhone() :: ', error)
+      throw error
     }
   }
   async createEmailAccount({ name, email, phone, password }) {
@@ -45,12 +43,12 @@ class UserService {
         email,
         password,
         name
-      );
+      )
 
       if (response) {
-        await this.account.createEmailPasswordSession(email, password);
+        await this.account.createEmailPasswordSession(email, password)
 
-        const userId = response.$id;
+        const userId = response.$id
         await this.database.createDocument(
           conf.appwriteDatabaseId,
           conf.appwriteUsersCid,
@@ -61,57 +59,55 @@ class UserService {
             email: email,
             userId: userId,
           }
-        );
-        return response;
+        )
+        return response
       }
     } catch (error) {
-      console.log("appwriteUserService :: createEmailAccount() :: ", error);
-      throw error;
+      console.log('appwriteUserService :: createEmailAccount() :: ', error)
+      throw error
     }
   }
 
   async loginEmail({ email, password }) {
     try {
-      console.log(conf.appwriteUrl);
-      console.log(conf.appwriteCartCid);
       const session = await this.account.createEmailPasswordSession(
         email,
         password
-      );
+      )
       if (session) {
-        return session;
+        return session
       }
     } catch (error) {
-      console.log("appwriteUserService :: loginEmail() :: ", error);
-      throw error;
+      console.log('appwriteUserService :: loginEmail() :: ', error)
+      throw error
     }
   }
 
   async logout() {
     try {
-      const response = await this.account.deleteSessions();
+      const response = await this.account.deleteSessions()
       if (response) {
-        return response;
+        return response
       }
     } catch (error) {
-      console.log("appwriteUserService :: logout() :: ", error);
-      throw error;
+      console.log('appwriteUserService :: logout() :: ', error)
+      throw error
     }
   }
 
   async getCurrentUser() {
     try {
-      const response = await this.account.get();
+      const response = await this.account.get()
       if (response) {
-        return response;
+        return response
       }
     } catch (error) {
-      console.log("appwriteUserService :: getCurrentUser() :: ", error);
-      throw error;
+      console.log('appwriteUserService :: getCurrentUser() :: ', error)
+      throw error
     }
   }
 }
 
-const userService = new UserService();
+const userService = new UserService()
 
-export default userService;
+export default userService
