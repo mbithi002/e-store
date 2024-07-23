@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import userService from '../../appwrite/userAuth'
 import { login, logout } from '../../features/auth/authSlice'
+import { reset } from '../../features/user/cart/cartSlice'
 
 const UserActions = () => {
     const { status, userData } = useSelector((state) => state.auth)
@@ -13,6 +14,7 @@ const UserActions = () => {
         navigate('/')
         userService.logout().then(() => {
             dispatch(logout())
+            dispatch(reset())
         }).finally(() => navigate('/'))
     }
     useEffect(() => {
@@ -20,7 +22,6 @@ const UserActions = () => {
             try {
                 if (!userData) {
                     const res = await userService.getCurrentUser();
-                    // console.log(res);
                     dispatch(login({ res }))
                 }
             } catch (error) {

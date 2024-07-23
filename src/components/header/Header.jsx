@@ -1,7 +1,21 @@
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import UserActions from './UserActions'
 
-function Header() {
+const shopComponent = React.lazy(() => import('../shop/AllProducts'))
+
+const Header = () => {
+
+    useEffect(() => {
+        const preloadShop = () => {
+            shopComponent.preload()
+        }
+
+        const shopLink = document.getElementById('shop-link')
+        shopLink.addEventListener('mouseover', () => {
+            preloadShop()
+        })
+    }, [])
 
     return (
         <header className="sm:block hidden">
@@ -12,7 +26,7 @@ function Header() {
                         <nav className="flex flex-row items-center justify-evenly my-auto text-sm">
                             <ul className="flex flex-row">
                                 <Link to={'/'}><li className="mx-2">Home <i class="fa-solid fa-house"></i></li></Link>
-                                <Link to={'/shop'}><li className="mx-2">Shop <i class="fa-solid fa-shop"></i></li></Link>
+                                <Link to={'/shop'} id='shop-link'><li className="mx-2">Shop <i class="fa-solid fa-shop"></i></li></Link>
                                 <Link to={'/cart'}><li className="mx-2">cart <i class="fa-solid fa-cart-shopping"></i></li></Link>
                                 <Link to={'/orders'}><li className="mx-2">Orders <i class="fa-solid fa-truck"></i></li></Link>
                                 {/* <Link to={'/search'}><li className="mx-2">Search <i class="fa-solid fa-search"></i></li></Link> */}
@@ -48,5 +62,7 @@ function Header() {
         </header>
     )
 }
+
+shopComponent.preload = () => import('../shop/AllProducts')
 
 export default Header

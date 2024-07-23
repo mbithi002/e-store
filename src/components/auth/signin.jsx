@@ -1,3 +1,4 @@
+// import { lineSpinner } from 'ldrs';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -5,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import userService from '../../appwrite/userAuth';
 import { login as authLogin } from '../../features/auth/authSlice';
 import WifiLoader from '../loaders/WifiLoader';
+
+// lineSpinner.register()
 
 const Signin = () => {
     const [loading, setLoading] = useState(false)
@@ -21,7 +24,6 @@ const Signin = () => {
             if (session) {
                 const userData = await userService.getCurrentUser()
                 if (userData) {
-                    console.log(userData);
                     dispatch(authLogin({ userData }))
                     navigate('/')
                 }
@@ -33,8 +35,15 @@ const Signin = () => {
     }
 
     if (loading) return (
-        <div className="h-screen w-full flex items-center justify-center">
+        <div className="h-screen w-full flex items-center justify-center bg-white">
             <WifiLoader message='Authenticating' />
+
+            {/* <l-line-spinner
+                size="70"
+                stroke="3"
+                speed="1"
+                color="black"
+            ></l-line-spinner> */}
         </div>
     )
     return (
