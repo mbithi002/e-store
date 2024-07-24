@@ -1,6 +1,7 @@
 import { lineSpinner } from 'ldrs'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { fetchAllproducts } from '../../features/user/shop/productThunks'
 import ProductCard from './ProductCard'
 
@@ -8,6 +9,7 @@ lineSpinner.register()
 
 const AllProducts = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { products, fetching, error } = useSelector((state) => state.products)
     if (!products) dispatch(fetchAllproducts())
 
@@ -27,11 +29,16 @@ const AllProducts = () => {
             {error}
         </div>
     )
+
+    const handleCardClick = (id) => {
+        navigate(`/product/${id}`);
+    };
+
     return (
         <>
             {
                 products.map((product) => (
-                    <div className="" key={product.productId}>
+                    <div className="" key={product.$id}>
                         <ProductCard
                             id={product.$id}
                             productName={product.productName}
@@ -40,6 +47,7 @@ const AllProducts = () => {
                             description={product.productDescription}
                             rating={product.productRating}
                             stock={product.status}
+                            onClick={() => handleCardClick(product.$id)}
                         />
                     </div>
                 ))

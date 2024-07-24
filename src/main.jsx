@@ -16,6 +16,7 @@ import {
 } from './pages/pages.js'
 import store from './store/store.js'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -50,7 +51,13 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: '/product/:slug',
+        path: 'shop/product/:slug',
+        element: (
+          <Product />
+        )
+      },
+      {
+        path: 'search/product/:slug',
         element: (
           <Product />
         )

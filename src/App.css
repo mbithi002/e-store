@@ -1,0 +1,19 @@
+/* Custom scrollbar styles for webkit browsers (Chrome, Safari) */
+.category-ul::-webkit-scrollbar {
+  height: 4px; /* Height of the scrollbar */
+}
+
+.category-ul::-webkit-scrollbar-track {
+  background: transparent; /* Background of the scrollbar track */
+}
+
+.category-ul::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* Color of the scroll thumb */
+  border-radius: 4px; /* Rounded corners for the scroll thumb */
+}
+
+/* Custom scrollbar styles for Firefox */
+.category-ul {
+  scrollbar-width: thin; /* Make the scrollbar thin */
+  scrollbar-color: #9ca3af transparent; /* Scroll thumb color and track color */
+}

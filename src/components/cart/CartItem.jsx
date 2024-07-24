@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, deleteItemFromCart } from '../../features/user/cart/cartThunks';
+import { addToCart, deleteItemFromCart, fetchCart } from '../../features/user/cart/cartThunks';
 import CustomCheckbox from '../common/CustomCheckbox';
 
 const CartItem = ({ id = '', image = '', name = '', count = 1, description = '', price = 0 }) => {
@@ -10,6 +10,7 @@ const CartItem = ({ id = '', image = '', name = '', count = 1, description = '',
 
     const handleRemoveFromCart = (productId) => {
         dispatch(deleteItemFromCart({ userId: userData.$id, productId }));
+        dispatch(fetchCart())
     };
 
     const handleCheckboxChange = (event) => {
@@ -27,22 +28,13 @@ const CartItem = ({ id = '', image = '', name = '', count = 1, description = '',
                     <CustomCheckbox checked={checked} onChange={(e) => handleCheckboxChange(e)} />
                 </div>
                 <img src={image} alt={name} className="h-[inherit] w-[7rem] object-cover" />
-                <div className="flex flex-col items-start px-2">
+                <div className="flex flex-col items-start px-2 justify-between">
                     <p className="font-semibold text-xl">{name}</p>
                     <p className="text-sm">{description}</p>
-                    <p className="text-sm p-1 mt-1 border border-black rounded-md">Ksh: <span className="font-bold">{price}</span></p>
-                    <div className="flex w-full flex-row justify-between my-2">
-                        <div onClick={() => handleRemoveFromCart(id)} className="cursor-pointer flex items-center">
+                    <div className="flex w-full flex-row justify-between">
+                        <p className="text-sm p-1 mt-1 border border-black rounded-md">Ksh: <span className="font-bold">{price}</span></p>
+                        <div onClick={() => handleRemoveFromCart(id)} className="cursor-pointer flex items-center hover:text-red-400 active:text-red-600 transition-all duration-200 ">
                             <i className="fa-solid fa-trash"></i>
-                        </div>
-                        <div className="flex flex-row items-center justify-around self-end">
-                            <button onClick={() => handleAddToCart(id)} className="">
-                                <i className="fa-solid fa-plus mx-2"></i>
-                            </button>
-                            <span className="">{count}</span>
-                            <button onClick={() => handleRemoveFromCart(id)} className="">
-                                <i className="fa-solid fa-minus mx-2"></i>
-                            </button>
                         </div>
                     </div>
                 </div>
