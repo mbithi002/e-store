@@ -11,10 +11,10 @@ const Shop = () => {
 
     return (
         <>
-            <div className="sm:mt-[4rem]">
+            <div className="sm:mt-[4rem] mt-[4rem]">
                 <div className="container min-w-[100vw]">
                     <header className="bg-gray-200 text-gray-800 p-2 flex flex-col">
-                        <nav className="flex flex-row w-fulll">
+                        <nav className="flex flex-row w-fulll mb-2 px-2 shadow-md">
                             <ul className="flex flex-row overflow-x-scroll category-ul">
                                 {categories.map((item, index) => (
                                     <li key={index} className="mr-2 my-1">

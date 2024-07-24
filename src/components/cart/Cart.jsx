@@ -64,7 +64,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="sm:mt-[4.5rem] w-[inherit] px-3">
+    <div className="sm:mt-[4.5rem] mt-[4rem] w-[inherit] px-3">
       <div className="flex flex-row justify-between items-center px-3">
         <div className="text-center text-gray-700 text-2xl font-bold my-2 pt-2">
           Your Cart
