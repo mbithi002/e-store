@@ -17,11 +17,12 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
   };
 
   const goToProductPage = (productId) => {
-    navigate(`product/${productId}`)
+    // navigate('/')
+    navigate(`/${productId}`)
   }
 
   return (
-    <div className="card sm:w-[190px] w-[260px] sm:my-2 my-2 h-[340px] m-2 bg-[#f5f5f5] relative overflow-visible shadow-md mx-auto">
+    <div className="card sm:w-[190px] w-[260px] sm:my-2 my-2 h-[400px] sm:h-[340px] m-2 bg-[#f5f5f5] relative overflow-visible shadow-md mx-auto">
       <div className="card-img bg-gray-200 h-[60%] w-full rounded-md transition-all duration-300 ease-in-out relative">
         <img src={String(image)} alt={image} className="object-cover w-full h-full rounded-md hover:brightness-[70%] transition-all duration-300 ease-in-out cursor-pointer" />
         <p className="text-sm absolute -top-2 -left-2 p-1 bg-white rounded-sm">Ksh: <span className="font-bold">{price}</span></p>

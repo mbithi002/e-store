@@ -17,7 +17,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
     };
 
     const goToProductPage = (productId) => {
-        navigate(`product/${productId}`)
+        navigate(`/${productId}`)
     }
 
     return (

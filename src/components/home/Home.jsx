@@ -64,7 +64,7 @@ function Home() {
                         <p className="text-sm">Payments done Electronically</p>
                     </div>
                 </div>
-                <div className="grid sm:grid-cols-3 px-[4rem] sm:h-[13rem] bg-gray-200">
+                <div className="grid sm:grid-cols-3 sm:px-[4rem] sm:h-[13rem] bg-gray-200 sm:content-center content-start">
                     <div className="mx-auto p-5">
                         <p className="text-3xl font-bold text-black">HAVEN BEAUTY:</p>
                         <p className="text-gray-700">Where Beauty Blossoms</p>

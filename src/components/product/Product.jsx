@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { fetchAllproducts } from '../../features/user/shop/productThunks';
 import useProduct from '../../hooks/useProduct';
 import useRelatedProducts from '../../hooks/useRelatedProducts';
 import { ProductCardComponent } from '../components';
 import ReadOnlyRating from '../shop/ReadOnlyRating';
 
 const Product = () => {
+    const dispatch = useDispatch();
     const { slug } = useParams();
-    const { product, fetching, error } = useProduct(slug)
-    const { relatedProducts, fetchingRelatedProducts, relatedProductsError } = useRelatedProducts(product.categoryId)
 
-    console.log(relatedProducts);
+    const { product, fetching, error } = useProduct(slug);
+    const { relatedProducts, fetchingRelatedProducts, relatedProductsError } = useRelatedProducts(product?.categoryId);
+
+    useEffect(() => {
+        if (!product) dispatch(fetchAllproducts());
+    }, [product, dispatch]);
 
     if (fetching) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -33,7 +39,7 @@ const Product = () => {
                             </p>
                         </button>
                         <div className="">
-                            <p className="text-xl font-semibold text-teal-500 mb-3">Desscription</p>
+                            <p className="text-xl font-semibold text-teal-500 mb-3">Description</p>
                             <p className="text-lg text-black mb-3">{product.productDescription}</p>
                         </div>
                         <div className="flex flex-col items-start">
@@ -121,23 +127,6 @@ const Product = () => {
                                     description={product.productDescription}
                                     rating={product.productRating}
                                     stock={product.status}
-                                    onClick={() => handleCardClick(product.$id)}
-                                />
-                            </div>
-                        ))
-                    }
-                    {
-                        relatedProducts.map((product) => (
-                            <div key={product.$id} className="mx-3">
-                                <ProductCardComponent
-                                    id={product.$id}
-                                    productName={product.productName}
-                                    price={product.productPrice}
-                                    image={product.productImage}
-                                    description={product.productDescription}
-                                    rating={product.productRating}
-                                    stock={product.status}
-                                    onClick={() => handleCardClick(product.$id)}
                                 />
                             </div>
                         ))
@@ -145,7 +134,7 @@ const Product = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default Product;
