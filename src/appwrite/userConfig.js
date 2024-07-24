@@ -1,15 +1,13 @@
-import { Client, Databases } from "appwrite";
-import conf from "../conf/conf";
+import { Client, Databases } from 'appwrite'
+import conf from '../conf/conf'
 
 class UserConfig {
-  client = new Client();
-  database;
+  client = new Client()
+  database
 
   constructor() {
-    this.client
-      .setEndpoint(conf.appwriteUrl)
-      .setProject(conf.appwriteProjectId);
-    this.database = new Databases(this.client);
+    this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId)
+    this.database = new Databases(this.client)
   }
 
   async getAllProducts() {
@@ -17,11 +15,11 @@ class UserConfig {
       const res = await this.database.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteProductsCid
-      );
-      return res;
+      )
+      return res
     } catch (error) {
-      console.log("userConfig :: getAllProducts() :: ", error);
-      throw error;
+      console.log('userConfig :: getAllProducts() :: ', error)
+      throw error
     }
   }
 
@@ -31,36 +29,36 @@ class UserConfig {
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid,
         userId
-      );
-      return res.cart;
+      )
+      return res.cart
     } catch (error) {
-      console.log("userConfig :: getCart() :: ", error);
-      throw error;
+      console.log('userConfig :: getCart() :: ', error)
+      throw error
     }
   }
 
   async addItemToCart(userId, productId) {
     try {
-      console.log("productId>>>", productId);
+      console.log('productId>>>', productId)
       const userDoc = await this.database.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid,
         userId
-      );
+      )
 
-      const updatedCart = [...userDoc.cart, String(productId)];
+      const updatedCart = [...userDoc.cart, String(productId)]
 
       await this.database.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid,
         userId,
         { cart: updatedCart }
-      );
+      )
 
-      return updatedCart;
+      return updatedCart
     } catch (error) {
-      console.log("userConfig :: addItemToCart() :: ", error);
-      throw error;
+      console.log('userConfig :: addItemToCart() :: ', error)
+      throw error
     }
   }
 
@@ -70,21 +68,21 @@ class UserConfig {
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid,
         userId
-      );
+      )
 
-      const updatedCart = userDoc.cart.filter((item) => item !== productId);
+      const updatedCart = userDoc.cart.filter((item) => item !== productId)
 
       await this.database.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid,
         userId,
         { cart: updatedCart }
-      );
+      )
 
-      return updatedCart;
+      return updatedCart
     } catch (error) {
-      console.log("userConfig :: deleteItemFromCart() :: ", error);
-      throw error;
+      console.log('userConfig :: deleteItemFromCart() :: ', error)
+      throw error
     }
   }
 
@@ -97,15 +95,15 @@ class UserConfig {
         {
           cart: [],
         }
-      );
-      return res;
+      )
+      return res
     } catch (error) {
-      console.log("userConfig :: clearCart() :: ", error);
-      throw error;
+      console.log('userConfig :: clearCart() :: ', error)
+      throw error
     }
   }
 }
 
-const userConfig = new UserConfig();
+const userConfig = new UserConfig()
 
-export default userConfig;
+export default userConfig

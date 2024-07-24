@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.canvas {
+  animation: canvas 400ms ease-in;
+}
+
+@keyframes canvas {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -57,7 +72,8 @@
 /* Hover */
 .card-img:hover {
   transform: translateY(-25%);
-  box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px,
+  box-shadow:
+    rgba(226, 196, 63, 0.25) 0px 13px 47px -5px,
     rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
 }
 
@@ -291,7 +307,7 @@
 
 .honeycomb div:after,
 .honeycomb div:before {
-  content: "";
+  content: '';
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   position: absolute;
@@ -427,25 +443,25 @@
 .example-2 .icon-content a:hover .filled {
   height: 100%;
 }
-.example-2 .icon-content a[data-social="instagram"] .filled,
-.example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+.example-2 .icon-content a[data-social='instagram'] .filled,
+.example-2 .icon-content a[data-social='instagram'] ~ .tooltip {
   background-color: #1db954;
   background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
 }
-.example-2 .icon-content a[data-social="pinterest"] .filled,
-.example-2 .icon-content a[data-social="pinterest"] ~ .tooltip {
+.example-2 .icon-content a[data-social='pinterest'] .filled,
+.example-2 .icon-content a[data-social='pinterest'] ~ .tooltip {
   background-color: #bd081c;
 }
-.example-2 .icon-content a[data-social="whatsapp"] .filled,
-.example-2 .icon-content a[data-social="whatsapp"] ~ .tooltip {
+.example-2 .icon-content a[data-social='whatsapp'] .filled,
+.example-2 .icon-content a[data-social='whatsapp'] ~ .tooltip {
   background-color: #40c351;
 }
-.example-2 .icon-content a[data-social="telegram"] .filled,
-.example-2 .icon-content a[data-social="telegram"] ~ .tooltip {
+.example-2 .icon-content a[data-social='telegram'] .filled,
+.example-2 .icon-content a[data-social='telegram'] ~ .tooltip {
   background-color: #0088cc;
 }
-.example-2 .icon-content a[data-social="x"] .filled,
-.example-2 .icon-content a[data-social="x"] ~ .tooltip {
+.example-2 .icon-content a[data-social='x'] .filled,
+.example-2 .icon-content a[data-social='x'] ~ .tooltip {
   background-color: #03a9f4;
 }
 
@@ -483,7 +499,7 @@
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
+  content: '';
   position: absolute;
   transform: rotate(0deg);
   border: 0.1em solid black;
@@ -492,7 +508,9 @@
   /* width: 1.05em;
   height: 1.05em; */
   border-radius: 0.25em;
-  transition: all 0.25s, border-width 0.1s;
+  transition:
+    all 0.25s,
+    border-width 0.1s;
 }
 
 /* Show the checkmark when checked */
