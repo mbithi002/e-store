@@ -25,7 +25,7 @@ const Product = () => {
     return (
         <div className="w-[100vw] h-full">
             <div className="container">
-                <div className="grid sm:grid-cols-12 grid-cols-1 gap-4 px-5 my-2">
+                <div className="flex flex-col-reverse sm:grid sm:grid-cols-12 grid-cols-1 gap-4 px-5 my-2">
                     <div className="sm:col-span-4 flex items-center shadow-lg">
                         <img src={product.productImage} alt={product.productName} className="hover:object-contain hover:brightness-[70%] transition-all duration-200 ease-in-out object-cover sm:h-[70dvh] h-[50dvh] mx-auto" />
                     </div>

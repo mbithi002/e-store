@@ -1,8 +1,11 @@
+import CustomCheckBox from '../components/common/CustomCheckbox'
 import Signin from './auth/signin'
 import Signup from './auth/Signup'
 import Cart from './cart/Cart'
+import Footer from './footer/Footer'
 import Header from './header/Header'
 import Home from './home/Home'
+import Socials from './home/Socials'
 import HoneycombLoader from './loaders/HoneycombLoader'
 import WifiLoader from './loaders/WifiLoader'
 import ProductModal from './modals/ProductModal'
@@ -14,15 +17,18 @@ import Shop from './shop/Shop'
 
 export {
   Cart as CartComponent,
+  CustomCheckBox as CustomCheckBoxComponent,
+  Footer as FooterComponent,
   Header as HeaderComponent,
   Home as HomeComponent,
   HoneycombLoader as HoneycombLoaderComponent,
   Orders as OrdersComponent,
-  ProductCard as ProductCardComponent, Product as ProductComponent, ProductModal as ProductModalComponent,
+  ProductCard as ProductCardComponent,
+  Product as ProductComponent,
+  ProductModal as ProductModalComponent,
   Search as SearchComponent,
   Shop as ShopComponent,
   Signin as SigninComponent,
-  Signup as SignupComponent,
-  WifiLoader as WifiLoaderComponent
+  Signup as SignupComponent, Socials as SocialsComponent, WifiLoader as WifiLoaderComponent
 }
 

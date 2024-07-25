@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useFeaturedProducts from '../../hooks/useFeaturedProducts';
 import ProductModal from '../modals/ProductModal';
 
@@ -7,9 +7,9 @@ const FeaturedProducts = () => {
     const [modalProduct, setModalProduct] = useState({});
     const { featuredProducts, fetching, error } = useFeaturedProducts();
 
-    useEffect(() => {
-        console.log(featuredProducts);
-    }, [featuredProducts]);
+    // useEffect(() => {
+    //     console.log(featuredProducts);
+    // }, [featuredProducts]);
 
     const handleModal = (id) => {
         const prod = featuredProducts.find((product) => product.$id === id);

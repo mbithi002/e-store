@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import userService from '../../appwrite/userAuth';
 import { logout } from '../../features/auth/authSlice';
+import { getCart } from '../../features/user/cart/cartUtils';
 import UserActions from './UserActions';
 
 const shopComponent = React.lazy(() => import('../shop/AllProducts'));
 
 const Header = () => {
-    const { cart } = useSelector((state) => state.cart);
     const { status, userData } = useSelector((state) => state.auth)
     const navigate = useNavigate();
     const [canvas, setCanvas] = useState(false)
@@ -50,13 +50,11 @@ const Header = () => {
                                 <ul className="flex flex-row items-center">
                                     <Link to={'/'}><li className="mx-2">Home <i className="fa-solid fa-house"></i></li></Link>
                                     <Link to={'/shop'} id='shop-link'><li className="mx-2">Shop <i className="fa-solid fa-shop"></i></li></Link>
-                                    <Link to={'/cart'}><li className="mx-2 my-auto">cart
-                                        <div className="relative inline-block p-1 rounded-lg">
-                                            <i className="fa-solid fa-cart-shopping text-black"></i>
-                                            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                                                {cart.length}
-                                            </span>
-                                        </div></li></Link>
+                                    <Link to={'/cart'}>
+                                        <li className="mx-2 my-auto">cart
+                                            <i className="fa-solid fa-cart-shopping text-black mx-1"></i>
+                                        </li>
+                                    </Link>
                                     <Link to={'/orders'}><li className="mx-2">Orders <i className="fa-solid fa-truck"></i></li></Link>
                                     {/* <Link to={'/search'}><li className="mx-2">Search <i class="fa-solid fa-search"></i></li></Link> */}
                                 </ul>
@@ -129,7 +127,7 @@ const Header = () => {
                                                 Cart
                                             </p>
                                             <p className="text-xl font-bold">
-                                                {cart ? cart.length : '0'}
+                                                {getCart() ? getCart().length : 0}
                                             </p>
                                         </div>
                                     </Link>
