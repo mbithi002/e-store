@@ -31,7 +31,7 @@ const Shop = () => {
                     </header>
                     <div className="w-full min-h-screen">
                         <p className="text-center text-2xl font-semibold my-1">Skin Care</p>
-                        <div className="grid md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2 items-center sm:px-4">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2 items-center sm:px-4">
                             <AllProducts />
                         </div>
                     </div>

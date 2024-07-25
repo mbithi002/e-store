@@ -54,6 +54,5 @@ export const getCartItemsWithCounts = (products) => {
       count: productCounts[product.$id] || 0,
     }))
     .filter((product) => product.count > 0)
-  console.log(items)
   return items
 }

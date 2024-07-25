@@ -1,6 +1,5 @@
 import React from 'react'
 import { Package as PackageIcon, Paid as PaidIcon, Return as ReturnIcon, Support as SupportIcon } from '../../assets/google/google'
-import { FooterComponent } from '../components'
 import FeaturedProducts from './FeaturedProducts'
 
 function Home() {
@@ -64,7 +63,6 @@ function Home() {
                         <p className="text-sm">Payments done Electronically</p>
                     </div>
                 </div>
-                <FooterComponent />
             </div>
         </div>
     )

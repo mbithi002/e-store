@@ -10,7 +10,6 @@ const CartCardComponent = ({ products }) => {
     useEffect(() => {
         initializeCart();
         const items = getCartItemsWithCounts(products);
-        console.log(items);
         setCartItems(items)
     }, [products]);
 

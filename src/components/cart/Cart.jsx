@@ -27,7 +27,7 @@ const Cart = () => {
   )
 
   return (
-    <div>
+    <div className='sm:min-h-[70dvh] py-10 min-h-[80dvh]'>
       {
         products && (
           <CartCardComponent products={products} />

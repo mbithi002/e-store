@@ -11,9 +11,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
+    "@mapbox/node-pre-gyp": "^1.0.11",
     "@reduxjs/toolkit": "^2.2.6",
     "appwrite": "^15.0.0",
+    "aws-sdk": "^2.1663.0",
+    "bcryptjs": "^2.4.3",
     "ldrs": "^1.0.2",
+    "mock-aws-s3": "^4.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",

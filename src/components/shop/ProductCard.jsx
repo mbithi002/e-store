@@ -20,7 +20,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
 
 
   return (
-    <div className="card sm:w-[190px] w-[260px] sm:my-2 my-2 h-[400px] sm:h-[340px] m-2 bg-[#f5f5f5] relative overflow-visible shadow-md mx-auto">
+    <div className="card sm:w-[190px] w-[178px] sm:my-2 my-4 h-[340px] sm:h-[340px] m-2 bg-[#f5f5f5] relative overflow-visible mx-auto sm:shadow-md shadow-xl">
       <div className="card-img bg-gray-200 h-[60%] w-full rounded-md transition-all duration-300 ease-in-out relative">
         <img src={String(image)} alt={image} className="object-cover w-full h-full rounded-md hover:brightness-[70%] transition-all duration-300 ease-in-out cursor-pointer" />
         <p className="text-sm absolute -top-2 -left-2 p-1 bg-white rounded-sm">Ksh: <span className="font-bold">{price}</span></p>
@@ -35,13 +35,13 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
       <flex onClick={() => goToProductPage(id)} className="flex-col items-start cursor-pointer">
         <div className="card-info pt-[5%] px-2">
           <p className="font-semibold text-md leading-6 mb-1">{String(productName).length > 19 ? `${String(productName).slice(0, 19)}...` : String(productName)}</p>
-          <p className=" text-sm">
+          <p className="sm:text-sm text-xs">
             {
               description.length > 20 ? `${description.slice(0, 60)}...` : description
             }
           </p>
         </div>
-        <div className="card-footer w-full flex justify-between items-center pt-2.5 mb-1 border-t border-[#ddd] gap-2 absolute bottom-0 pl-2 pr-3">
+        <div className="shadow-lg bg-white p-2 rounded-md card-footer w-full flex justify-between items-center pt-2.5 border-t border-[#ddd] gap-2 absolute bottom-0 mr-3 ">
           <button className="flex items-center w-1/2 justify-center gap-2 sm:px-2 py-1 bg-[#181717] text-white border-none rounded-md outline outline-3 outline-[#181717] outline-offset-[-3px] cursor-pointer transition-colors duration-400 active:bg-transparent active:text-[#181717]">
             <svg viewBox="0 0 16 16" className="bi bi-cart-check h-4 w-4 transition-colors duration-400 active:fill-[#181717]" xmlns="http://www.w3.org/2000/svg" fill="#fff">
               <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>

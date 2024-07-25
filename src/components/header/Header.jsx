@@ -13,6 +13,7 @@ const Header = () => {
     const navigate = useNavigate();
     const [canvas, setCanvas] = useState(false)
     const dispatch = useDispatch()
+    const [form, setForm] = useState(false)
 
     useEffect(() => {
         const preloadShop = () => {
@@ -24,6 +25,11 @@ const Header = () => {
             preloadShop();
         });
     }, []);
+
+    const handleProfile = () => {
+        setCanvas(!canvas)
+        userData ? navigate(`/profile/:${userData.name}`) : navigate('/signin')
+    }
 
     const handleLogout = () => {
         setCanvas(!canvas)
@@ -90,27 +96,60 @@ const Header = () => {
                 </div>
             </header>
             <header className="block sm:hidden fixed top-0 z-40 w-full">
-                <div className="flex flex-row items-center justify-between p-2 bg-gray-200">
-                    <div onClick={() => setCanvas(!canvas)} className="">
-                        {
-                            canvas ? (
-                                <i className="fa-regular fa-circle-xmark text-2xl"></i>
-                            ) : (
-                                <i class="fa-solid fa-bars text-2xl"></i>
-                            )
-                        }
-                    </div>
-                    <Link to={'/'}>
-                        <h1 onClick={() => setCanvas(false)} className="text-2xl font-bold">HAVEN</h1>
-                    </Link>
-                    <Link to={'/search'}>
-                        <i className="fa-solid fa-search text-2xl"></i>
-                    </Link>
-                </div>
+                {
+                    form ? (
+                        <form
+                            className="flex relative items-center w-full sm:h-[40px] h-[50px] sm:mt-0 px-3 rounded-full bg-gray-400 transition-all duration-500 focus-within:rounded-sm"
+                            onSubmit={handleSearchSubmit}
+                        >
+                            <button className="border-none bg-none text-white">
+                                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" strokeWidth="1.333" strokeLinecap="round" strokeLinejoin="round"></path>
+                                </svg>
+                            </button>
+                            <input
+                                name="search"
+                                className="w-full h-full px-2 py-1.5 text-sm bg-transparent border-none focus:outline-none placeholder:text-white text-white font-semibold"
+                                placeholder="Search for a product..."
+                                required
+                                type="text"
+                            />
+                            <i onClick={() => setForm(!form)} className="fa-regular fa-circle-xmark text-lg text-white"></i>
+                            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#2f2ee9] transform scale-x-0 transition-transform duration-300 ease-in-out origin-center form-focus:scale-x-100">
+                            </div>
+                        </form>
+                    ) : (
+                        <div className="flex flex-row items-center justify-between p-2 bg-gray-200">
+                            <div onClick={() => setCanvas(!canvas)} className="">
+                                {
+                                    canvas ? (
+                                        <i className="fa-regular fa-circle-xmark text-2xl"></i>
+                                    ) : (
+                                        <i class="fa-solid fa-bars text-2xl"></i>
+                                    )
+                                }
+                            </div>
+                            <Link to={'/'}>
+                                <h1 onClick={() => setCanvas(false)} className="text-2xl font-bold">HAVEN</h1>
+                            </Link>
+                            <div onClick={() => setForm(!form)} className="">
+                                <i className="fa-solid fa-search text-2xl"></i>
+                            </div>
+                        </div>
+                    )
+                }
                 {
                     canvas && (
                         <div className="z-50 canvas w-[100vw] min-h-[100dvh] bg-gray-200 flex flex-col p-2 relative">
                             <ul className="flex flex-col">
+                                <li onClick={() => setCanvas(!canvas)} className="text-2xl font-semibold w-full p-2 shadow-md rounded-e-md my-2 bg-gray-100">
+                                    <Link to={'/'}>
+                                        <p className="">
+                                            <i className="fa-solid fa-house text-[1.3rem] mr-2"></i>
+                                            Home
+                                        </p>
+                                    </Link>
+                                </li>
                                 <li onClick={() => setCanvas(!canvas)} className="text-2xl font-semibold w-full p-2 shadow-md rounded-e-md my-2 bg-gray-100">
                                     <Link to={'/shop'}>
                                         <p className="">
@@ -140,13 +179,11 @@ const Header = () => {
                                         </p>
                                     </Link>
                                 </li>
-                                <li onClick={() => setCanvas(!canvas)} className="text-2xl font-semibold w-full p-2 shadow-md rounded-e-md my-2 bg-gray-100">
-                                    <Link to={'/orders'}>
-                                        <p className="">
-                                            <i className="fa-solid fa-circle-user text-[1.3rem] mr-2"></i>
-                                            Profile
-                                        </p>
-                                    </Link>
+                                <li onClick={() => handleProfile()} className="text-2xl font-semibold w-full p-2 shadow-md rounded-e-md my-2 bg-gray-100">
+                                    <p className="">
+                                        <i className="fa-solid fa-circle-user text-[1.3rem] mr-2"></i>
+                                        Profile
+                                    </p>
                                 </li>
                             </ul>
                             {

@@ -29,6 +29,10 @@ const UserActions = () => {
 
         checkSession();
     }, [userData])
+
+    const handleProfile = () => {
+        userData ? navigate(`/profile/:${userData.name}`) : navigate('/')
+    }
     return (
         <div>
             <div className="flex flex-row items-center justify-evenly">
@@ -36,7 +40,7 @@ const UserActions = () => {
                     status && userData ? (
                         <div className="flex flex-row items-center">
                             <button onClick={() => handleLogout()} className="bg-red-500 text-white font-semibold py-1 px-3 rounded-md mx-2">Logout</button>
-                            <div className="cursor-pointer">
+                            <div onClick={() => handleProfile()} className="cursor-pointer">
                                 <i class="fa-regular fa-circle-user text-3xl"></i>
                             </div>
                         </div>

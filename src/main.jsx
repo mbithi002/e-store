@@ -3,19 +3,20 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
+import Protected from './components/layout/AuthLayout.jsx'
 import './index.css'
 import {
   Cart,
   Home,
   Orders,
   Product,
+  Profile,
   SearchProduct,
   Shop,
   SignIn,
   Signup
 } from './pages/pages.js'
 import store from './store/store.js'
-
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
         path: '/cart',
         element: (
           <Cart />
+        )
+      },
+      {
+        path: '/profile/:slug',
+        element: (
+          <Protected authentication={true}>
+            <Profile />
+          </Protected>
         )
       },
     ]

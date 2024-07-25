@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from 'react-router-dom';
 import './App.css';
-import { HeaderComponent } from './components/components';
+import { FooterComponent, HeaderComponent } from './components/components';
 import { fetchAllproducts } from "./features/user/shop/productThunks";
 
 const App = () => {
@@ -16,6 +16,7 @@ const App = () => {
       <main>
         <HeaderComponent />
         <Outlet />
+        <FooterComponent />
       </main>
     </div>
   )

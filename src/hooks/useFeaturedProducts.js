@@ -20,7 +20,6 @@ const useFeaturedProducts = () => {
       )
       setFeaturedProducts(featuredProds)
     }
-    console.log(featuredProducts.length)
   }, [products])
 
   return { featuredProducts, fetching, error }
