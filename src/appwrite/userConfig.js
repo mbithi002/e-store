@@ -71,14 +71,14 @@ class UserConfig {
     }
   }
 
-  async getAddress(userId) {
+  async getAddresses(userId) {
     try {
       const response = await this.database.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteUserAddressesCid,
         [Query.equal('userId', userId)]
       )
-      return response
+      return response.documents
     } catch (error) {
       console.log('userConfig :: getAddress() :: ', error)
       throw error

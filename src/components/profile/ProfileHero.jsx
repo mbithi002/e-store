@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ProfilePic } from '../../assets/google/google'
-import { CustomCheckBoxComponent } from '../components'
+import useAddresses from '../../hooks/useAddresses'
+import { WifiLoaderComponent } from '../components'
 import CreateAddress from './adresses/CreateAddress'
 
 const ProfileHero = () => {
     const userData = useSelector((state) => state.auth.userData)
     const [createModal, setCreateModal] = useState(false)
+    const { addresses, fetching, error } = useAddresses({ userData })
 
     return (
         <div>
@@ -44,59 +46,73 @@ const ProfileHero = () => {
                             <p className="font-bold my-3">Address Book</p>
                             <button onClick={() => setCreateModal(!createModal)} className="bg-green-500 text-white py-2 px-5 text-md font-bold hover:bg-green-700 transition-all duration-200x">+ Add an address</button>
                         </div>
+                        {
+                            fetching && (
+                                <div className='w-full h-full flex flex-col items-center'>
+                                    <div className="my-auto">
+                                        <WifiLoaderComponent message='Creating Address' />
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            error && (
+                                <div className='w-full h-full flex flex-col items-center'>
+                                    <div className="my-auto">
+                                        {error}
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            !error && !fetching && addresses.length < 1 && (
+                                <div className='w-full h-full flex flex-col items-center'>
+                                    <div className="my-auto">
+                                        <p className="text-center font-semibold text-black"> No addresses yet. <span className="block">Click "Add an address button" to create one</span> </p>
+                                    </div>
+                                </div>
+                            )
+                        }
                         <div className="w-full h-full grid sm:grid-cols-2">
-                            <div className="relative address-card flex flex-col items-start p-4 justify-normal rounded-md shadow-lg w-full h-[40dvh]">
-                                <div className="w-full flex flex-row justify-between">
-                                    <p>
-                                        <i className="fa-solid fa-user mx-2 text-lg text-black"></i>
-                                        {userData.name.toUpperCase()}
-                                    </p>
-                                    <p className='text-green-500 font-semibold'>
-                                        Pickup Station
-                                    </p>
-                                </div>
-                                <p className="my-2"><i className="fa-solid fa-phone mx-2"></i> {userData.phone} </p>
-                                <p className="my-2 text-sm">
-                                    <i className="fa-solid fa-location-dot mx-2 text-lg"></i>
-                                    TALA TOWN, Reinnotec Solutions Behind Matungulu medical health and wellness,Opposit Makawasco Kiosk, Cellphone:715907508
-                                </p>
-                                <div className="flex flex-row items-start justify-between absolute bottom-3 w-full pr-7">
-                                    <div className="flex flex-row items-center">
-                                        <CustomCheckBoxComponent />
-                                        Set as default
-                                    </div>
-                                    <div className="flex flex-row justify-between w-1/2">
-                                        <button className="py-1 w-1/2 px-2 bg-blue-500 text-white text-sm rounded-sm">Edit <i class="fa-solid fa-pen-to-square mx-2"></i> </button>
-                                        <button className="py-1 w-1/2 sm:px-2 ml-2 bg-red-500 text-white text-sm rounded-sm">Delete <i className="mx-1 fa-solid fa-trash text-xs"></i> </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative address-card flex flex-col items-start p-4 justify-normal rounded-md shadow-lg w-full h-[40dvh]">
-                                <div className="w-full flex flex-row justify-between">
-                                    <p>
-                                        <i className="fa-solid fa-user mx-2 text-lg text-black"></i>
-                                        {userData.name.toUpperCase()}
-                                    </p>
-                                    <p className='text-green-500 font-semibold'>
-                                        Pickup Station
-                                    </p>
-                                </div>
-                                <p className="my-2"><i className="fa-solid fa-phone mx-2"></i> {userData.phone} </p>
-                                <p className="my-2 text-sm">
-                                    <i className="fa-solid fa-location-dot mx-2 text-lg"></i>
-                                    TALA TOWN, Reinnotec Solutions Behind Matungulu medical health and wellness,Opposit Makawasco Kiosk, Cellphone:715907508
-                                </p>
-                                <div className="flex flex-row items-start justify-between absolute bottom-3 w-full pr-7">
-                                    <div className="flex flex-row items-center">
-                                        <CustomCheckBoxComponent />
-                                        Set as default
-                                    </div>
-                                    <div className="flex flex-row justify-between w-1/2">
-                                        <button className="py-1 w-1/2 px-2 bg-blue-500 text-white text-sm rounded-sm">Edit <i class="fa-solid fa-pen-to-square mx-2"></i> </button>
-                                        <button className="py-1 w-1/2 sm:px-2 ml-2 bg-red-500 text-white text-sm rounded-sm">Delete <i className="mx-1 fa-solid fa-trash text-xs"></i> </button>
-                                    </div>
-                                </div>
-                            </div>
+                            {
+                                addresses.length > 0 && !fetching ? (
+                                    <>
+                                        {
+                                            addresses.map((item) => (
+                                                <div key={item.$id} className="relative address-card flex flex-col items-start p-4 justify-normal rounded-md shadow-lg w-full h-[40dvh]">
+                                                    <div className="w-full flex flex-row justify-between">
+                                                        <p>
+                                                            <i className="fa-solid fa-user mx-2 text-lg text-black"></i>
+                                                            {item.name.toUpperCase()}
+                                                        </p>
+                                                        <p className='text-green-500 font-semibold'>
+                                                            Pickup Station
+                                                        </p>
+                                                    </div>
+                                                    <p className="my-2"><i className="fa-solid fa-phone mx-2"></i> {item.phone} </p>
+                                                    <p className="my-2 text-sm">
+                                                        <i className="fa-solid fa-location-dot mx-2 text-lg"></i>
+                                                        {`${item.county} County, ${item.town} Town, ${item.location}`}
+                                                    </p>
+                                                    <div className="flex flex-row items-start justify-between absolute bottom-3 w-full pr-7">
+                                                        <div className="flex flex-row items-center">
+                                                            {
+                                                                item.defaultAddress && (
+                                                                    <button className="py-1 px-2 bg-green-500 rounded-sm text-white">Default Address</button>
+                                                                )
+                                                            }
+                                                        </div>
+                                                        <div className="flex flex-row justify-between w-1/2">
+                                                            <button className="py-1 w-1/2 px-2 bg-blue-500 text-white text-sm rounded-sm">Edit <i class="fa-solid fa-pen-to-square mx-2"></i> </button>
+                                                            <button className="py-1 w-1/2 sm:px-2 ml-2 bg-red-500 text-white text-sm rounded-sm">Delete <i className="mx-1 fa-solid fa-trash text-xs"></i> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </>
+                                ) : ('')
+                            }
                         </div>
                     </div>
                 </div>
