@@ -1,4 +1,4 @@
-import { Client, Databases } from 'appwrite'
+import { Client, Databases, ID, Query } from 'appwrite'
 import conf from '../conf/conf'
 
 class UserConfig {
@@ -12,93 +12,62 @@ class UserConfig {
 
   async getAllProducts() {
     try {
-      const res = await this.database.listDocuments(
+      const response = await this.database.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteProductsCid
       )
-      return res
+      return response
     } catch (error) {
       console.log('userConfig :: getAllProducts() :: ', error)
       throw error
     }
   }
 
-  async getCart(userId) {
+  async createAddress(userId, name, phone, pickUpStation, def) {
     try {
-      const res = await this.database.getDocument(
+      const response = await this.database.createDocument(
         conf.appwriteDatabaseId,
-        conf.appwriteUsersCid,
-        userId
-      )
-      return res.cart
-    } catch (error) {
-      console.log('userConfig :: getCart() :: ', error)
-      throw error
-    }
-  }
-
-  async addItemToCart(userId, productId) {
-    try {
-      console.log('productId>>>', productId)
-      const userDoc = await this.database.getDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteUsersCid,
-        userId
-      )
-
-      const updatedCart = [...userDoc.cart, String(productId)]
-
-      await this.database.updateDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteUsersCid,
-        userId,
-        { cart: updatedCart }
-      )
-
-      return updatedCart
-    } catch (error) {
-      console.log('userConfig :: addItemToCart() :: ', error)
-      throw error
-    }
-  }
-
-  async deleteItemFromCart(userId, productId) {
-    try {
-      const userDoc = await this.database.getDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteUsersCid,
-        userId
-      )
-
-      const updatedCart = userDoc.cart.filter((item) => item !== productId)
-
-      await this.database.updateDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteUsersCid,
-        userId,
-        { cart: updatedCart }
-      )
-
-      return updatedCart
-    } catch (error) {
-      console.log('userConfig :: deleteItemFromCart() :: ', error)
-      throw error
-    }
-  }
-
-  async clearCart(userId) {
-    try {
-      const res = await this.database.updateDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteUsersCid,
-        userId,
+        conf.appwriteUserAddressesCid,
+        ID.unique(),
         {
-          cart: [],
+          userId: userId,
+          pickUpStation: pickUpStation,
+          default: def,
+          name: name,
+          phone: phone,
         }
       )
-      return res
+      return response
     } catch (error) {
-      console.log('userConfig :: clearCart() :: ', error)
+      console.log('userConfig :: createAddress() :: ', error)
+      throw error
+    }
+  }
+
+  async getAddress(userId) {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteUserAddressesCid,
+        [Query.equal('userId', userId)]
+      )
+      return response
+    } catch (error) {
+      console.log('userConfig :: getAddress() :: ', error)
+      throw error
+    }
+  }
+
+  async deleteAddress(documentId) {
+    try {
+      const response = await this.database.deleteDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteUserAddressesCid,
+        documentId
+      )
+      return response
+    } catch (error) {
+      console.log('userConfig :: deleteAddress() :: ', error)
       throw error
     }
   }
