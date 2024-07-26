@@ -92,6 +92,7 @@ class UserConfig {
         conf.appwriteUserAddressesCid,
         documentId
       )
+      console.log(response)
       return response
     } catch (error) {
       console.log('userConfig :: deleteAddress() :: ', error)

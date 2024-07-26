@@ -8,3 +8,12 @@ export const fetchAddresses = createAsyncThunk(
     return response
   }
 )
+
+export const deleteAddress = createAsyncThunk(
+  'addresses/deleteAddress',
+  async (documentId) => {
+    const response = await userConfig.deleteAddress(documentId)
+    console.log(response)
+    return response
+  }
+)

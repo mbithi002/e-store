@@ -3,16 +3,25 @@ import { useSelector } from 'react-redux'
 import { ProfilePic } from '../../assets/google/google'
 import useAddresses from '../../hooks/useAddresses'
 import { WifiLoaderComponent } from '../components'
+import ConfirmAddressDelete from './adresses/ConfirmAddressDelete'
 import CreateAddress from './adresses/CreateAddress'
 
 const ProfileHero = () => {
     const userData = useSelector((state) => state.auth.userData)
     const [createModal, setCreateModal] = useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
+    const [deleteItem, setDeleteItem] = useState('')
     const { addresses, fetching, error } = useAddresses({ userData })
+
+    const handleConfirmDelete = (itemId) => {
+        setConfirmDelete(!confirmDelete)
+        setDeleteItem(itemId)
+    }
 
     return (
         <div>
             <CreateAddress isOpen={createModal} onClose={() => setCreateModal(!createModal)} />
+            <ConfirmAddressDelete isOpen={confirmDelete} onClose={() => setConfirmDelete(!confirmDelete)} itemId={deleteItem} />
             <div className="container w-[100vw]">
                 <div className="grid sm:grid-cols-12 gap-4 w-full">
                     <div className="sm:col-span-4 flex flex-col items-center content-center">
@@ -50,7 +59,7 @@ const ProfileHero = () => {
                             fetching && (
                                 <div className='w-full h-full flex flex-col items-center'>
                                     <div className="my-auto">
-                                        <WifiLoaderComponent message='Creating Address' />
+                                        <WifiLoaderComponent />
                                     </div>
                                 </div>
                             )
@@ -104,7 +113,7 @@ const ProfileHero = () => {
                                                         </div>
                                                         <div className="flex flex-row justify-between w-1/2">
                                                             <button className="py-1 w-1/2 px-2 bg-blue-500 text-white text-sm rounded-sm">Edit <i class="fa-solid fa-pen-to-square mx-2"></i> </button>
-                                                            <button className="py-1 w-1/2 sm:px-2 ml-2 bg-red-500 text-white text-sm rounded-sm">Delete <i className="mx-1 fa-solid fa-trash text-xs"></i> </button>
+                                                            <button onClick={() => handleConfirmDelete(item.$id)} className="py-1 w-1/2 sm:px-2 ml-2 bg-red-500 text-white text-sm rounded-sm">Delete <i className="mx-1 fa-solid fa-trash text-xs"></i> </button>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -19,12 +19,10 @@ const addressesSlice = createSlice({
       state.addresses = action.payload
       state.error = null
       state.fetching = false
-      console.log(action)
     })
     builder.addCase(fetchAddresses.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message
-      console.log(action)
     })
   },
 })
