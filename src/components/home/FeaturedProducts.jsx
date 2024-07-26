@@ -7,10 +7,6 @@ const FeaturedProducts = () => {
     const [modalProduct, setModalProduct] = useState({});
     const { featuredProducts, fetching, error } = useFeaturedProducts();
 
-    // useEffect(() => {
-    //     console.log(featuredProducts);
-    // }, [featuredProducts]);
-
     const handleModal = (id) => {
         const prod = featuredProducts.find((product) => product.$id === id);
         setModalProduct(prod);

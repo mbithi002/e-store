@@ -23,18 +23,45 @@ class UserConfig {
     }
   }
 
-  async createAddress(userId, name, phone, pickUpStation, def) {
+  async createAddress({
+    userId,
+    defaultAddress,
+    name,
+    phone,
+    county,
+    town,
+    location,
+  }) {
     try {
+      const checkDefault = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteUserAddressesCid,
+        [Query.equal('userId', userId), Query.equal('defaultAddress', true)]
+      )
+
+      if (checkDefault.documents.length > 0) {
+        const updateDefault = await this.database.updateDocument(
+          conf.appwriteDatabaseId,
+          conf.appwriteUserAddressesCid,
+          checkDefault.documents[0].$id,
+          {
+            defaultAddress: false,
+          }
+        )
+        console.log(updateDefault)
+      }
       const response = await this.database.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteUserAddressesCid,
         ID.unique(),
         {
-          userId: userId,
-          pickUpStation: pickUpStation,
-          default: def,
-          name: name,
-          phone: phone,
+          userId,
+          defaultAddress,
+          name,
+          phone,
+          county,
+          town,
+          location,
         }
       )
       return response

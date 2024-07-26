@@ -3,6 +3,8 @@ import Admin from './admin/Admin'
 import Signin from './auth/signin'
 import Signup from './auth/Signup'
 import Cart from './cart/Cart'
+import Input from './common/Input'
+import Select from './common/Select'
 import Footer from './footer/Footer'
 import Header from './header/Header'
 import Home from './home/Home'
@@ -19,18 +21,24 @@ import ProductCard from './shop/ProductCard'
 import Shop from './shop/Shop'
 
 export {
-  Admin as AdminComponent, Cart as CartComponent,
+  Admin as AdminComponent,
+  Cart as CartComponent,
   CustomCheckBox as CustomCheckBoxComponent,
   Footer as FooterComponent,
   Header as HeaderComponent,
   Home as HomeComponent,
   HoneycombLoader as HoneycombLoaderComponent,
+  Input as InputComponent,
   Orders as OrdersComponent,
   ProductCard as ProductCardComponent,
   Product as ProductComponent,
-  ProductModal as ProductModalComponent, Profile as ProfileComponent, ProfileHero as ProfileHeroComponent, Search as SearchComponent,
-  Shop as ShopComponent,
+  ProductModal as ProductModalComponent,
+  Profile as ProfileComponent,
+  ProfileHero as ProfileHeroComponent,
+  Search as SearchComponent, Select as SelectComponent, Shop as ShopComponent,
   Signin as SigninComponent,
-  Signup as SignupComponent, Socials as SocialsComponent, WifiLoader as WifiLoaderComponent
+  Signup as SignupComponent,
+  Socials as SocialsComponent,
+  WifiLoader as WifiLoaderComponent
 }
 

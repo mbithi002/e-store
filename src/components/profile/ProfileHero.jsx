@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ProfilePic } from '../../assets/google/google'
 import { CustomCheckBoxComponent } from '../components'
+import CreateAddress from './adresses/CreateAddress'
 
 const ProfileHero = () => {
     const userData = useSelector((state) => state.auth.userData)
+    const [createModal, setCreateModal] = useState(false)
+
     return (
         <div>
+            <CreateAddress isOpen={createModal} onClose={() => setCreateModal(!createModal)} />
             <div className="container w-[100vw]">
                 <div className="grid sm:grid-cols-12 gap-4 w-full">
                     <div className="sm:col-span-4 flex flex-col items-center content-center">
@@ -38,7 +42,7 @@ const ProfileHero = () => {
                     <div className="sm:col-span-8 flex flex-col items-start p-5 w-full h-full">
                         <div className="flex flex-row w-full items-center justify-between pb-4">
                             <p className="font-bold my-3">Address Book</p>
-                            <button className="bg-green-500 text-white py-2 px-5 text-md font-bold hover:bg-green-700 transition-all duration-200x">+ Add an address</button>
+                            <button onClick={() => setCreateModal(!createModal)} className="bg-green-500 text-white py-2 px-5 text-md font-bold hover:bg-green-700 transition-all duration-200x">+ Add an address</button>
                         </div>
                         <div className="w-full h-full grid sm:grid-cols-2">
                             <div className="relative address-card flex flex-col items-start p-4 justify-normal rounded-md shadow-lg w-full h-[40dvh]">
