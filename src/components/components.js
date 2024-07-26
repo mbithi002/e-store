@@ -1,4 +1,5 @@
 import CustomCheckBox from '../components/common/CustomCheckbox'
+import Admin from './admin/Admin'
 import Signin from './auth/signin'
 import Signup from './auth/Signup'
 import Cart from './cart/Cart'
@@ -12,12 +13,13 @@ import ProductModal from './modals/ProductModal'
 import Orders from './orders/Orders'
 import Product from './product/Product'
 import Profile from './profile/Profile'
+import ProfileHero from './profile/ProfileHero'
 import Search from './search/Search'
 import ProductCard from './shop/ProductCard'
 import Shop from './shop/Shop'
 
 export {
-  Cart as CartComponent,
+  Admin as AdminComponent, Cart as CartComponent,
   CustomCheckBox as CustomCheckBoxComponent,
   Footer as FooterComponent,
   Header as HeaderComponent,
@@ -26,7 +28,7 @@ export {
   Orders as OrdersComponent,
   ProductCard as ProductCardComponent,
   Product as ProductComponent,
-  ProductModal as ProductModalComponent, Profile as ProfileComponent, Search as SearchComponent,
+  ProductModal as ProductModalComponent, Profile as ProfileComponent, ProfileHero as ProfileHeroComponent, Search as SearchComponent,
   Shop as ShopComponent,
   Signin as SigninComponent,
   Signup as SignupComponent, Socials as SocialsComponent, WifiLoader as WifiLoaderComponent

@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
+import AdminLayout from './components/layout/AdminLayout.jsx'
 import Protected from './components/layout/AuthLayout.jsx'
 import './index.css'
+import Admin from './pages/Admin.jsx'
 import {
   Cart,
   Home,
@@ -75,6 +77,14 @@ const router = createBrowserRouter([
           <Protected authentication={true}>
             <Profile />
           </Protected>
+        )
+      },
+      {
+        path: '/admin/:slug',
+        element: (
+          <AdminLayout authentication={true}>
+            <Admin />
+          </AdminLayout>
         )
       },
     ]

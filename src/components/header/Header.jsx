@@ -28,7 +28,7 @@ const Header = () => {
 
     const handleProfile = () => {
         setCanvas(!canvas)
-        userData ? navigate(`/profile/:${userData.name}`) : navigate('/signin')
+        userData ? navigate(`/profile/:${userData.name.replace(' ', '')}`) : navigate('/signin')
     }
 
     const handleLogout = () => {
