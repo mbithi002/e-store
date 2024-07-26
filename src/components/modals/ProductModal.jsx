@@ -1,5 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import React from 'react';
+import { addToCart } from '../../features/user/cart/cartUtils';
 
 const ProductModal = ({ isOpen, onClose, product }) => {
     // Destructure with default values to handle cases where product might be empty
@@ -10,6 +11,10 @@ const ProductModal = ({ isOpen, onClose, product }) => {
         stockStatus = 'Unknown',
         description = '',
     } = product || {};
+
+    const handleAddToCart = (productId) => {
+        addToCart(productId)
+    }
 
     return (
         <Dialog open={isOpen} onClose={onClose} className="relative z-40 h-[90dvh]">
@@ -33,7 +38,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
                                     <p className="text-sm text-gray-700 mb-6">{product.productDescription}</p>
                                     <div className="flex flex-row gap-4 absolute bottom-2">
                                         <button
-                                            onClick={() => console.log('Add to Cart clicked')}
+                                            onClick={() => handleAddToCart(product.$id)}
                                             className="px-4 py-2 bg-gray-200 text-black rounded hover:bg-white"
                                         >
                                             <i class="fa-solid fa-cart-shopping mr-2 text-lg"></i>Add to Cart

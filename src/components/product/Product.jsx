@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { addToCart } from '../../features/user/cart/cartUtils';
 import { fetchAllproducts } from '../../features/user/shop/productThunks';
 import useProduct from '../../hooks/useProduct';
 import useRelatedProducts from '../../hooks/useRelatedProducts';
@@ -13,6 +14,11 @@ const Product = () => {
 
     const { product, fetching, error } = useProduct(slug);
     const { relatedProducts, fetchingRelatedProducts, relatedProductsError } = useRelatedProducts(product?.categoryId);
+
+
+    const handleAddToCart = (productId) => {
+        addToCart(productId)
+    }
 
     useEffect(() => {
         if (!product) dispatch(fetchAllproducts());
@@ -63,7 +69,7 @@ const Product = () => {
                                 </svg>
                                 <p className="text-xl font-bold transition-colors duration-400 active:text-[#181717]">Buy Now</p>
                             </button>
-                            <button className="w-1/2 bg-gray-500 text-white m-1 p-1 text-xl font-bold text-center">
+                            <button onClick={() => handleAddToCart(product.$id)} className="w-1/2 bg-gray-500 text-white m-1 p-1 text-xl font-bold text-center">
                                 Add to cart <i className="mx-2 text-lg fa-solid fa-shopping-cart"></i>
                             </button>
                         </div>
