@@ -41,7 +41,6 @@ export const clearCart = () => {
 }
 
 export const getCartItemsWithCounts = (products) => {
-  console.log(products)
   const cart = getCart()
   const productCounts = cart.reduce((counts, id) => {
     counts[id] = (counts[id] || 0) + 1
@@ -55,4 +54,12 @@ export const getCartItemsWithCounts = (products) => {
     }))
     .filter((product) => product.count > 0)
   return items
+}
+
+export const getCartSubtotal = (products) => {
+  const items = getCartItemsWithCounts(products)
+  const subtotal = items.reduce((total, item) => {
+    return total + item.productPrice * item.count
+  }, 0)
+  return subtotal
 }

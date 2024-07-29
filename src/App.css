@@ -8,12 +8,12 @@
 }
 
 .category-ul::-webkit-scrollbar-thumb {
-  background-color: #9ca3af; /* Color of the scroll thumb */
+  background-color: #ff69b4; /* Color of the scroll thumb */
   border-radius: 4px; /* Rounded corners for the scroll thumb */
 }
 
 /* Custom scrollbar styles for Firefox */
 .category-ul {
   scrollbar-width: thin; /* Make the scrollbar thin */
-  scrollbar-color: #9ca3af transparent; /* Scroll thumb color and track color */
+  scrollbar-color: #ff69b4 transparent; /* Scroll thumb color and track color */
 }

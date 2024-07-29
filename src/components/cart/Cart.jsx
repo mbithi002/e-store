@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initializeCart } from '../../features/user/cart/cartUtils';
 import { fetchAllproducts } from '../../features/user/shop/productThunks';
 import CartCardComponent from './CartCardComponent';
-
 const Cart = () => {
   const dispatch = useDispatch();
   const { products, fetching, error } = useSelector((state) => state.products)
@@ -27,10 +26,12 @@ const Cart = () => {
   )
 
   return (
-    <div className='sm:min-h-[70dvh] py-10 min-h-[80dvh]'>
+    <div className='sm:min-h-[70dvh] min-h-[80dvh]'>
       {
         products && (
-          <CartCardComponent products={products} />
+          <>
+            <CartCardComponent products={products} />
+          </>
         )
       }
     </div>

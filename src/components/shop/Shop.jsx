@@ -13,14 +13,14 @@ const Shop = () => {
         <>
             <div className="sm:mt-[4rem] mt-[4rem]">
                 <div className="container min-w-[100vw]">
-                    <header className="bg-gray-200 text-gray-800 p-2 flex flex-col">
+                    <header className="bg-gray-100 text-gray-800 p-2 flex flex-col">
                         <nav className="flex flex-row w-fulll mb-2 px-2 shadow-md">
                             <ul className="flex flex-row overflow-x-scroll category-ul">
                                 {categories.map((item, index) => (
                                     <li key={index} className="mr-2 my-1">
                                         <button
                                             onClick={() => handleCategoryClick(item)}
-                                            className="py-1 px-3 bg-gray-400 text-white rounded-md"
+                                            className="py-1 px-3 bg-[#ff69b4] text-white rounded-md"
                                         >
                                             {item}
                                         </button>

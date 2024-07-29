@@ -48,8 +48,8 @@ const Header = () => {
     return (
         <>
             <header className="sm:block hidden">
-                <div className="fixed container w-full h-[4rem] z-40 top-0 text-black px-2">
-                    <div className="flex flex-row items-center my-auto justify-between p-3 h-full bg-white rounded-xl shadow-md">
+                <div className="fixed container w-full h-[4rem] z-40 top-0 text-white">
+                    <div className="flex flex-row items-center my-auto justify-between p-3 h-full bg-[#ff69b4] shadow-md">
                         <div className="flex flex-row">
                             <div className="logo text-2xl font-semibold">Logo</div>
                             <nav className="flex flex-row items-center justify-evenly my-auto text-sm">
@@ -58,7 +58,7 @@ const Header = () => {
                                     <Link to={'/shop'} id='shop-link'><li className="mx-2">Shop <i className="fa-solid fa-shop"></i></li></Link>
                                     <Link to={'/cart'}>
                                         <li className="mx-2 my-auto">cart
-                                            <i className="fa-solid fa-cart-shopping text-black mx-1"></i>
+                                            <i className="fa-solid fa-cart-shopping mx-1"></i>
                                         </li>
                                     </Link>
                                     <Link to={'/orders'}><li className="mx-2">Orders <i className="fa-solid fa-truck"></i></li></Link>
@@ -67,7 +67,7 @@ const Header = () => {
                             </nav>
                         </div>
                         <form
-                            className="flex relative items-center -ml-[6rem] w-[360px] h-[40px] px-3 rounded-full bg-gray-400 transition-all duration-500 focus-within:rounded-sm"
+                            className="flex relative items-center -ml-[6rem] w-[360px] h-[40px] border border-white px-3 rounded-full  transition-all duration-500 focus-within:rounded-sm"
                             onSubmit={handleSearchSubmit}
                         >
                             <button className="border-none bg-none text-white">
