@@ -62,7 +62,15 @@ const Header = () => {
                                         </li>
                                     </Link>
                                     <Link to={'/orders'}><li className="mx-2">Orders <i className="fa-solid fa-truck"></i></li></Link>
-                                    {/* <Link to={'/search'}><li className="mx-2">Search <i class="fa-solid fa-search"></i></li></Link> */}
+                                    {
+                                        userData ? (
+                                            userData.isAdmin && (
+                                                <div className="">
+                                                    <Link to={`/admin/:${userData.$id}`}><li className="mx-2">Admin<i className="fa-solid fa-user"></i></li></Link>
+                                                </div>
+                                            )
+                                        ) : ('')
+                                    }
                                 </ul>
                             </nav>
                         </div>

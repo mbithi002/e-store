@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import usersSlice from '../features/admin/usersSlice'
 import authSlice from '../features/auth/authSlice'
 import addressSlice from '../features/user/addresses/addressesSlice'
 import checkoutSlice from '../features/user/checkout/checkoutSlice'
@@ -9,7 +10,8 @@ const store = configureStore({
     auth: authSlice,
     products: productsSlice,
     addresses: addressSlice,
-    checkout: checkoutSlice
+    checkout: checkoutSlice,
+    getUsers: usersSlice,
   },
 })
 

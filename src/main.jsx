@@ -32,45 +32,31 @@ const router = createBrowserRouter([
       },
       {
         path: '/signin',
-        element: (
-          <SignIn />
-        )
+        element: <SignIn />
       },
       {
         path: '/signup',
-        element: (
-          <Signup />
-        )
+        element: <Signup />
       },
       {
         path: '/shop',
-        element: (
-          <Shop />
-        )
+        element: <Shop />
       },
       {
         path: '/search',
-        element: (
-          <SearchProduct />
-        )
+        element: <SearchProduct />
       },
       {
         path: '/:slug',
-        element: (
-          <Product />
-        )
+        element: <Product />
       },
       {
         path: '/orders',
-        element: (
-          <Orders />
-        )
+        element: <Orders />
       },
       {
         path: '/cart',
-        element: (
-          <Cart />
-        )
+        element: <Cart />
       },
       {
         path: '/profile/:slug',
@@ -83,20 +69,19 @@ const router = createBrowserRouter([
       {
         path: '/admin/:slug',
         element: (
-          <AdminLayout authentication={true}>
+          <AdminLayout>
             <Admin />
           </AdminLayout>
         )
       },
       {
         path: '/checkout/',
-        element: (
-          <Checkout />
-        )
+        element: <Checkout />
       },
     ]
   }
 ])
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

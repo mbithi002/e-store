@@ -2,21 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-const AdminLayout = ({ children, authentication = true }) => {
+const AdminLayout = ({ children }) => {
     const { status, userData } = useSelector((state) => state.auth)
-    const adminPhone = 723450978
-
     const navigate = useNavigate()
     const [loader, setLoader] = useState(true)
 
     useEffect(() => {
-        if (authentication && status !== authentication) {
-            navigate("/signin")
-        } else if (!authentication && status !== authentication && userData.phone === adminPhone) {
+        if (!status || !userData.isAdmin) {
             navigate("/")
         }
         setLoader(false)
-    }, [status, authentication, navigate])
+    }, [status, userData, navigate])
 
     return loader ? null : <>{children}</>
 }

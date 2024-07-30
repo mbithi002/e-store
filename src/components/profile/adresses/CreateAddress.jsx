@@ -51,7 +51,6 @@ const CreateAddress = ({ isOpen, onClose }) => {
         }
     };
 
-    // Watch the 'defaultAddress' field to get its current value
     const defValue = watch('defaultAddress');
 
     return (

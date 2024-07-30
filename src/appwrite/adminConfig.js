@@ -1,15 +1,13 @@
-import { Client, Databases, ID } from "appwrite";
-import conf from "../conf/conf";
+import { Client, Databases, ID } from 'appwrite'
+import conf from '../conf/conf'
 
 class AdminConfig {
-  client = new Client();
-  databases;
+  client = new Client()
+  databases
 
   constructor() {
-    this.client
-      .setEndpoint(conf.appwriteUrl)
-      .setProject(conf.appwriteProjectId);
-    this.databases = new Databases(this.client);
+    this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId)
+    this.databases = new Databases(this.client)
   }
 
   async createProduct(
@@ -41,15 +39,28 @@ class AdminConfig {
           productReviews: productReviews,
           productTags: productTags,
         }
-      );
-      return response;
+      )
+      return response
     } catch (error) {
-      console.log("adminConfig :: createProduc() :: ", error);
-      throw error;
+      console.log('adminConfig :: createProduc() :: ', error)
+      throw error
+    }
+  }
+
+  async getAllusers() {
+    try {
+      const response = await this.databases.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteUsersCid
+      )
+      return response.documents
+    } catch (error) {
+      console.log('adminConfig :: getAllUsers() :: ', error)
+      throw error
     }
   }
 }
 
-const adminConfig = new AdminConfig();
+const adminConfig = new AdminConfig()
 
-export default adminConfig;
+export default adminConfig
