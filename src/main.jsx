@@ -7,6 +7,7 @@ import AdminLayout from './components/layout/AdminLayout.jsx'
 import Protected from './components/layout/AuthLayout.jsx'
 import './index.css'
 import Admin from './pages/Admin.jsx'
+import Checkout from './pages/Checkout.jsx'
 import {
   Cart,
   Home,
@@ -85,6 +86,12 @@ const router = createBrowserRouter([
           <AdminLayout authentication={true}>
             <Admin />
           </AdminLayout>
+        )
+      },
+      {
+        path: '/checkout/',
+        element: (
+          <Checkout />
         )
       },
     ]

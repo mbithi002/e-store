@@ -99,6 +99,23 @@ class UserConfig {
       throw error
     }
   }
+
+  async getDefaultAddress(userId) {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteUserAddressesCid,
+        [
+          Query.equal('userId', userId),
+          Query.equal('defaultAddress', true),
+        ]
+      )
+      return response.documents[0]
+    } catch (error) {
+      console.log('userConfig :: getDefaultAddress() :: ', error)
+      throw error
+    }
+  }
 }
 
 const userConfig = new UserConfig()

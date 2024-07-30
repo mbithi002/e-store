@@ -3,6 +3,7 @@ import Admin from './admin/Admin'
 import Signin from './auth/signin'
 import Signup from './auth/Signup'
 import Cart from './cart/Cart'
+import Checkout from './checkout/Checkout'
 import Input from './common/Input'
 import Select from './common/Select'
 import Footer from './footer/Footer'
@@ -22,8 +23,7 @@ import Shop from './shop/Shop'
 
 export {
   Admin as AdminComponent,
-  Cart as CartComponent,
-  CustomCheckBox as CustomCheckBoxComponent,
+  Cart as CartComponent, Checkout as CheckoutComponent, CustomCheckBox as CustomCheckBoxComponent,
   Footer as FooterComponent,
   Header as HeaderComponent,
   Home as HomeComponent,

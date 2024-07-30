@@ -45,7 +45,7 @@ const CartCardComponent = ({ products }) => {
     }
 
     const goToProductPage = (productId) => {
-        navigate(`/${productId}`)
+        navigate(`/:${productId}`)
     }
 
     if (cartItems.length === 0) return (
