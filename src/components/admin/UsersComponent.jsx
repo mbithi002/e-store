@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useUsers from '../../hooks/useUsers';
+import { WifiLoaderComponent } from '../components';
 import CreateUser from './modals/CreateUser';
-
+import UpdateUser from './modals/UpdateUser';
 const UsersComponent = () => {
     const { allUsers, fetching, error } = useUsers()
     const [createUserModal, setCreateUserModal] = useState(false)
+    const [updateUserModal, setUpdateUserModal] = useState(false)
+    const [editUser, setEditUser] = useState({})
+
+    const handleEditUser = (user) => {
+        setEditUser(user)
+        setCreateUserModal(!createUserModal)
+    }
+
+    useEffect(() => { }, [allUsers])
 
     if (fetching) return (
-        <div className="">Loading</div>
+        <div className="w-full h-screen flex items-center justify-center content-center">
+            <div className="-mt-[5rem]">
+                <WifiLoaderComponent message='fetching...' />
+            </div>
+        </div>
     )
     if (error) return (
         <div className="">{error}</div>
@@ -15,6 +29,7 @@ const UsersComponent = () => {
     return (
         <>
             <CreateUser onClose={() => setCreateUserModal(!createUserModal)} isOpen={createUserModal} />
+            <UpdateUser onClose={() => setCreateUserModal(!updateUserModal)} isOpen={updateUserModal} user={editUser} />
             <div className="flex flex-col w-full h-full">
                 <div className="flex flex-row justify-between mb-2 w-full">
                     <p className="">All users</p>
@@ -37,7 +52,7 @@ const UsersComponent = () => {
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.email}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.phone}</td>
                                     <td className='flex items-center p-1'>
-                                        <button className="bg-blue-500 w-full h-full text-white rounded-md">Edit</button>
+                                        <button onClick={() => handleEditUser(user)} className="bg-blue-500 w-full h-full text-white rounded-md">Edit</button>
                                     </td>
                                 </tr>
                             ))

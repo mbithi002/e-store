@@ -1,8 +1,8 @@
 import React from 'react';
 
-function WifiLoader({message = 'Loading...'}) {
+function WifiLoader({ message = 'Loading...' }) {
     return (
-        <div id="wifi-loader" className="relative flex justify-center items-center w-16 h-16 rounded-full">
+        <div id="wifi-loader" className="relative flex justify-center items-center w-12 h-12 rounded-full">
             <svg className="circle-outer" viewBox="0 0 86 86">
                 <circle className="back" cx="43" cy="43" r="40"></circle>
                 <circle className="front" cx="43" cy="43" r="40"></circle>
@@ -15,7 +15,7 @@ function WifiLoader({message = 'Loading...'}) {
                 <circle className="back" cx="17" cy="17" r="14"></circle>
                 <circle className="front" cx="17" cy="17" r="14"></circle>
             </svg>
-            <div className="text absolute flex justify-center items-center text-sm font-medium tracking-wide" data-text={message}></div>
+            <div className="text absolute flex justify-center items-center text-xs font-medium tracking-wide" data-text={message}></div>
         </div>
     );
 }

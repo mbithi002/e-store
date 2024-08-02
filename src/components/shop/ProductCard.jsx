@@ -9,7 +9,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
   const productId = id;
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const { userData } = useSelector((state) => state.auth);
+  const { status, userData } = useSelector((state) => state.auth);
 
   const goToProductPage = (productId) => {
     // navigate('/')
@@ -20,6 +20,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
   }
 
   const handleCheckout = (productId) => {
+    if (!status) navigate('/signup')
     dispatch(checkoutProduct(productId))
     navigate('/checkout')
   }

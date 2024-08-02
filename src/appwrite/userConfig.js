@@ -105,14 +105,31 @@ class UserConfig {
       const response = await this.database.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteUserAddressesCid,
-        [
-          Query.equal('userId', userId),
-          Query.equal('defaultAddress', true),
-        ]
+        [Query.equal('userId', userId), Query.equal('defaultAddress', true)]
       )
       return response.documents[0]
     } catch (error) {
       console.log('userConfig :: getDefaultAddress() :: ', error)
+      throw error
+    }
+  }
+
+  async updateAccount({ documentId, name, phone, email }) {
+    try {
+      const response = await this.database.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteUsersCid,
+        documentId,
+        {
+          name,
+          email,
+          phone,
+        }
+      )
+      console.log(response)
+      return response
+    } catch (error) {
+      console.log('userConfig :: updateAccount() :: ', error)
       throw error
     }
   }

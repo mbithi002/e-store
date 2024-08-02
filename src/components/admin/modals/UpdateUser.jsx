@@ -1,48 +1,54 @@
 import { Dialog } from '@headlessui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import userService from '../../../appwrite/userAuth'
+import userConfig from '../../../appwrite/userConfig'
 import { fetchAllUsers } from '../../../features/admin/userThunks'
 import { InputComponent } from '../../components'
 
-const CreateUser = ({ isOpen, onClose }) => {
-    const { register, handleSubmit } = useForm()
-    const [error, setError] = useState('')
+const UpdateUser = ({ onClose, isOpen, user }) => {
     const dispatch = useDispatch()
+    const [error, setError] = useState('')
+    const { register, handleSubmit, reset } = useForm()
 
-    const create = async (data) => {
+    useEffect(() => {
+        if (user) {
+            reset({
+                documentId: user.$id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone
+            })
+        }
+    }, [user, reset])
+    const update = async (data) => {
         try {
-            const res = await userService.createEmailAccount(data)
-            if (!res) {
-                setError("Failed to create user.")
-            }
-            onClose()
+            const res = await userConfig.updateAccount({ data })
+            if (!res) setError("Failed to update user")
             dispatch(fetchAllUsers())
+            onClose()
         } catch (error) {
-            console.log(error);
             setError(error.message)
         }
     }
+
     return (
         <div>
             <Dialog open={isOpen} onClose={onClose} className="relative z-40 h-[95dvh]">
                 <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
                 <div className="fixed inset-0 flex items-center justify-center p-4 sm:h-[90dvh] h-[100dvh]">
                     <Dialog.Panel className="bg-white rounded-lg shadow-lg max-w-4xl w-full mx-auto my-auto sm:h-[90dvh] h-[90dvh]">
-                        <p className="text-center text-black text-xl font-semibold">Fill out the form below</p>
-                        {
-                            error && (
-                                <p className="text-center text-red-500">{error}</p>
-                            )
-                        }
-                        <form onSubmit={handleSubmit(create)} className="px-5">
+                        <p className="text-center text-black text-xl font-semibold">Fill out the form below to update <span className="text-green-500">{user.name}</span></p>
+                        {error && (
+                            <p className="text-center text-red-500">{error}</p>
+                        )}
+                        <form onSubmit={handleSubmit(update)} className="px-5">
                             <InputComponent
                                 label="User Name"
                                 type='text'
                                 placeholder='Enter user name'
                                 className='text-black focus:bg-blue-100 focus:text-black'
-                                {...register("name", { required: true })}
+                                {...register("name", { required: false })}
                             />
                             <InputComponent
                                 label="E-mail  ( optional )"
@@ -56,16 +62,21 @@ const CreateUser = ({ isOpen, onClose }) => {
                                 type='tel'
                                 placeholder='Enter phone'
                                 className='text-black focus:bg-blue-100 focus:text-black'
-                                {...register("phone", { required: true })}
+                                {...register("phone", { required: false })}
                             />
                             <InputComponent
                                 label="Password"
                                 type='password'
                                 placeholder='Enter password'
                                 className='text-black focus:bg-blue-100 focus:text-black'
-                                {...register("password", { required: true })}
+                                {...register("password", { required: false })}
                             />
-                            <button type="submit" className="mt-5 p-1 w-full bg-blue-500 hover:bg-blue-300 text-white text-xl font-semibold">Submit</button>
+                            <button
+                                type="submit"
+                                className="mt-5 p-1 w-full bg-blue-500 hover:bg-blue-300 text-white text-xl font-semibold"
+                            >
+                                Submit
+                            </button>
                         </form>
                         <button
                             onClick={onClose}
@@ -82,11 +93,11 @@ const CreateUser = ({ isOpen, onClose }) => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                    </Dialog.Panel >
-                </div >
-            </Dialog >
-        </div >
+                    </Dialog.Panel>
+                </div>
+            </Dialog>
+        </div>
     )
 }
 
-export default CreateUser
+export default UpdateUser

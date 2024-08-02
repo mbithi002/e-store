@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useFeaturedProducts from '../../hooks/useFeaturedProducts';
+import { WifiLoaderComponent } from '../components';
 import ProductModal from '../modals/ProductModal';
 
 const FeaturedProducts = () => {
@@ -13,7 +14,11 @@ const FeaturedProducts = () => {
         setIsModalOpen(true);
     };
 
-    if (fetching) return <div className="Loading">Loading...</div>;
+    if (fetching) return <div className="w-full h-full flex items-center my-5">
+        <div className="mx-auto">
+            <WifiLoaderComponent message='featured' />
+        </div>
+    </div>;
     if (error) return <div className="">{error}</div>;
 
     return (

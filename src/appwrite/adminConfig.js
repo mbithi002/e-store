@@ -59,6 +59,7 @@ class AdminConfig {
       throw error
     }
   }
+  
 }
 
 const adminConfig = new AdminConfig()

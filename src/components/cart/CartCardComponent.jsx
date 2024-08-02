@@ -49,7 +49,7 @@ const CartCardComponent = ({ products }) => {
     }
 
     if (cartItems.length === 0) return (
-        <p className="mt-[5rem]">Cart is empty</p>
+        <p className="mt-[5rem] text-center">Cart is empty</p>
     );
 
     return (
@@ -58,7 +58,7 @@ const CartCardComponent = ({ products }) => {
                 <p className="text-2xl font-semibold">Your Cart</p>
                 <div className="fa-solid fa-shopping-cart mx-2"></div>
             </div>
-            <div className='grid sm:grid-cols-3 px-5 gap-4'>
+            <div className='grid sm:grid-cols-3 px-5 gap-4 my-5'>
                 {cartItems.map((product) => (
                     <div key={product.$id} className="flex flex-col py-3 px-2 bg-white shadow-lg mx-auto rounded-lg border border-gray-200 w-full">
                         <div className="flex flex-row h-[9rem] py-2 relative">
@@ -85,7 +85,7 @@ const CartCardComponent = ({ products }) => {
                     </div>
                 ))}
             </div>
-            <div className="flex flex-row items-center justify-between p-5 absolute w-full bottom-0">
+            <div className="flex flex-row items-center justify-between p-5 w-full">
                 <div className="flex flex-col">
                     <p className="text-lg mb-2">Cart Subtotals: KSH <span className="border border-[#ff69b4] p-1 rounded-md">{subTotals}</span></p>
                     <button className="bg-[#ff69b4] p-2 text-white">Proceed to checkout</button>

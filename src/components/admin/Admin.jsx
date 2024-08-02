@@ -16,7 +16,7 @@ const Admin = () => {
                 <div className="grid sm:grid-cols-12 gap-4">
                     {
                         sideBar && (
-                            <div className="col-span-3 w-full h-full p-2 adminSideBar">
+                            <div className="col-span-3 w-full h-full px-2 pt-10 adminSideBar">
                                 <div className="flex w-full h-full flex-col text-black">
                                     <button onClick={() => setContent('admins')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
                                         <i className="fa-solid fa-lock"></i> Admins

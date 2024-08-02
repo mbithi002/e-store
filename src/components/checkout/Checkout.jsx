@@ -14,6 +14,7 @@ const Checkout = () => {
         const getAddress = async () => {
             const add = await userConfig.getDefaultAddress(userData.$id)
             setDefAdd(add)
+            console.log(defAdd);
         }
         getAddress()
         const prods = allProducts.filter((product) => productIds.includes(product.$id))
