@@ -5,7 +5,7 @@ import { addToCart } from '../../features/user/cart/cartUtils';
 import { checkoutProduct } from '../../features/user/checkout/checkoutSlice';
 import ReadOnlyRating from './ReadOnlyRating';
 
-function ProductCard({ id, image = 'image', productName = '', description = '', price = 0, rating = 0, stock = '' }) {
+function ProductCard({ id, image = 'image', productName = '', description = '', price = 0, rating = 0, stock = '', inActive = false, isNew = false }) {
   const productId = id;
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -27,10 +27,15 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
 
 
   return (
-    <div className="card sm:w-[190px] w-[178px] sm:my-2 my-4 h-[340px] sm:h-[340px] m-2 bg-[#f5f5f5] relative overflow-visible mx-auto sm:shadow-md shadow-xl">
+    <div className={` ${inActive && 'pointer-events-none'} card sm:w-[190px] w-[178px] sm:my-2 my-4 h-[340px] sm:h-[340px] m-2 bg-[#f5f5f5] relative overflow-visible mx-auto sm:shadow-md shadow-xl`}>
       <div className="card-img bg-gray-200 h-[60%] w-full rounded-md transition-all duration-300 ease-in-out relative">
         <img src={String(image)} alt={image} className="object-cover w-full h-full rounded-md hover:brightness-[70%] transition-all duration-300 ease-in-out cursor-pointer" />
         <p className="text-sm absolute -top-2 -left-2 p-1 bg-white rounded-sm">Ksh: <span className="font-bold">{price}</span></p>
+        {isNew && (
+          <div className="absolute top-2 right-2 h-8 w-8 flex items-center justify-center rounded-full bg-black text-white text-xs">
+            New
+          </div>
+        )}
       </div>
       <div onClick={() => handleAddToCart(productId)} className="absolute bottom-[40%] left-1 card-button border border-[#252525] flex p-1 cursor-pointer rounded-full transition-all duration-300 ease-in-out bg-gray-100">
         <svg className="svg-icon w-5 h-5" viewBox="0 0 20 20">

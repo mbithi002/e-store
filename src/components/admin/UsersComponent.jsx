@@ -30,7 +30,7 @@ const UsersComponent = () => {
         <>
             <CreateUser onClose={() => setCreateUserModal(!createUserModal)} isOpen={createUserModal} />
             <UpdateUser onClose={() => setCreateUserModal(!updateUserModal)} isOpen={updateUserModal} user={editUser} />
-            <div className="flex flex-col w-full h-full">
+            <div className="flex flex-col w-full h-full slide-left">
                 <div className="flex flex-row justify-between mb-2 w-full">
                     <p className="">All users</p>
                     <button onClick={() => setCreateUserModal(!createUserModal)} className="bg-green-400 py-1 px-5 rounded-sm self-end">+ Add</button>

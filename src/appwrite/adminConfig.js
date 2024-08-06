@@ -20,7 +20,10 @@ class AdminConfig {
     productStatus,
     productRating,
     productReviews,
-    productTags
+    productTags,
+    category,
+    featured,
+    isNew
   ) {
     try {
       const response = await this.databases.createDocument(
@@ -28,21 +31,24 @@ class AdminConfig {
         conf.appwriteProductsCid,
         ID.unique(),
         {
-          productName: productName,
-          productPrice: productPrice,
-          productImage: productImage,
-          productDescription: productDescription,
-          categoryId: categoryId,
-          productQuantity: productQuantity,
-          productStatus: productStatus,
-          productRating: productRating,
-          productReviews: productReviews,
-          productTags: productTags,
+          productName,
+          productPrice,
+          productImage,
+          productDescription,
+          categoryId,
+          productQuantity,
+          productStatus,
+          productRating,
+          productReviews,
+          productTags,
+          category,
+          featured,
+          isNew,
         }
       )
       return response
     } catch (error) {
-      console.log('adminConfig :: createProduc() :: ', error)
+      console.log('adminConfig :: createProduct() :: ', error)
       throw error
     }
   }
@@ -59,7 +65,6 @@ class AdminConfig {
       throw error
     }
   }
-  
 }
 
 const adminConfig = new AdminConfig()

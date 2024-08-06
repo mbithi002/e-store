@@ -20,10 +20,10 @@ const AdminsTable = () => {
     )
     return (
         <>
-            <div className="flex flex-col w-full h-full">
+            <div className="flex flex-col w-full h-full slide-left">
                 <div className="flex flex-row justify-between mb-2 w-full">
                     <p className="">All Admins</p>
-                    <button onClick={() => setCreateUserModal(!createUserModal)} className="bg-green-400 py-1 px-5 rounded-sm self-end">+ Add</button>
+                    {/* <button onClick={() => setCreateUserModal(!createUserModal)} className="bg-green-400 py-1 px-5 rounded-sm self-end">+ Add</button> */}
                 </div>
                 <table className="table-auto w-full">
                     <thead className='border border-white'>
