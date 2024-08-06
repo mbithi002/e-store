@@ -24,7 +24,7 @@ const ProductsTable = () => {
             <CreateProduct isOpen={createModal} onClose={() => setCreateModal(!createModal)} />
             <div className="flex flex-col w-full h-full slide-left">
                 <div className="flex flex-row justify-between mb-2 w-full">
-                    <p className="">All Products</p>
+                    <p className="">All Products <span className="text-green-400 font-bold text-xl">{products && products.length}</span></p>
                     <button onClick={() => setCreateModal(!createModal)} className="bg-green-400 py-1 px-5 rounded-sm self-end">+ Add</button>
                 </div>
                 <table className="table-auto w-full">
@@ -39,7 +39,9 @@ const ProductsTable = () => {
                             <th className='bg-gray-700'>Status</th>
                             <th className='bg-gray-700'>Featured</th>
                             <th className='bg-gray-700'>New</th>
-                            {/* <th className='bg-gray-700'>Action</th> */}
+                            <th className='bg-gray-700'>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +60,7 @@ const ProductsTable = () => {
                                     <td className='pl-2 hover:bg-gray-500 cursor-pointer text-start border-x-black border text-white transition-all duration-150'>{product.featured ? 'Yes' : 'No'}</td>
                                     <td className='pl-2 hover:bg-gray-500 cursor-pointer text-start border-x-black border text-white transition-all duration-150'>{product.new ? 'Yes' : 'No'}</td>
                                     <td className='flex items-center p-1 text-center w-full h-full'>
-                                        <i className="fa-solid fa-pen-to-square text-white text-xl self-center cursor-pointer hover:text-green-500 transition-all duration-300"></i>
+                                        <i className="fa-solid fa-pen-to-square text-white text-xl self-center cursor-pointer hover:text-green-500 transition-all duration-300 m-auto"></i>
                                     </td>
                                 </tr>
                             ))

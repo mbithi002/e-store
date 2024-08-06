@@ -9,7 +9,8 @@ const useAddresses = ({ userData }) => {
 
   useEffect(() => {
     if (!addresses && userData.$id) dispatch(fetchAddresses(userData.$id))
-    setDefaultAddress(addresses.filter((x) => x.defaultAddress))
+    const defAdd = addresses.filter((x) => x.defaultAddress)
+    setDefaultAddress(defAdd[0])
   }, [dispatch, addresses])
 
   return { addresses, fetching, error, defaultAddress }

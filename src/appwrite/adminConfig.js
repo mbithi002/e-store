@@ -1,13 +1,47 @@
-import { Client, Databases, ID } from 'appwrite'
+import { Client, Databases, ID, Query } from 'appwrite'
+import bcrypt from 'bcryptjs'
 import conf from '../conf/conf'
 
 class AdminConfig {
   client = new Client()
-  databases
+  database
 
   constructor() {
     this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId)
-    this.databases = new Databases(this.client)
+    this.database = new Databases(this.client)
+  }
+
+  async createUser({ name, email, phone, password }) {
+    try {
+      const users = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteUsersCid,
+        [Query.equal('email', email), Query.equal('phone', Number(phone))]
+      )
+
+      if (users.total > 0) {
+        throw new Error('A user with the same email or phone already exists')
+      }
+
+      const userId = ID.unique()
+      const hashedPassword = await bcrypt.hash(
+        String(password),
+        conf.bcryptSaltRounds
+      )
+      console.log(hashedPassword)
+
+      const user = await this.database.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteUsersCid,
+        userId,
+        { name, email, phone: Number(phone), password: hashedPassword }
+      )
+
+      return user
+    } catch (error) {
+      console.log('adminConfig :: createUser() :: ', error)
+      throw error
+    }
   }
 
   async createProduct(
@@ -26,7 +60,7 @@ class AdminConfig {
     isNew
   ) {
     try {
-      const response = await this.databases.createDocument(
+      const response = await this.database.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteProductsCid,
         ID.unique(),
@@ -55,7 +89,7 @@ class AdminConfig {
 
   async getAllusers() {
     try {
-      const response = await this.databases.listDocuments(
+      const response = await this.database.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid
       )

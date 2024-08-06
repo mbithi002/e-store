@@ -11,6 +11,8 @@ import ReadOnlyRating from '../shop/ReadOnlyRating';
 const Product = () => {
     const dispatch = useDispatch();
     const { slug } = useParams();
+    console.log(slug);
+
 
     const { product, fetching, error } = useProduct(slug);
     const { relatedProducts, fetchingRelatedProducts, relatedProductsError } = useRelatedProducts(product?.categoryId);
@@ -58,7 +60,7 @@ const Product = () => {
                         <div className="flex flex-row items-center">
                             <p className="text-lg font-bold text-black">Ratings: </p>
                             <div className="self-center my-auto">
-                                <ReadOnlyRating rating={product.rating} />
+                                <ReadOnlyRating rating={product.productRating} />
                             </div>
                         </div>
                         <div className="sm:my-1 my-3 w-full flex flex-row">

@@ -2,7 +2,7 @@ import { Dialog } from '@headlessui/react'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import userService from '../../../appwrite/userAuth'
+import adminConfig from '../../../appwrite/adminConfig'
 import { fetchAllUsers } from '../../../features/admin/userThunks'
 import { InputComponent } from '../../components'
 
@@ -13,7 +13,7 @@ const CreateUser = ({ isOpen, onClose }) => {
 
     const create = async (data) => {
         try {
-            const res = await userService.createEmailAccount(data)
+            const res = await adminConfig.createUser(data)
             if (!res) {
                 setError("Failed to create user.")
             }

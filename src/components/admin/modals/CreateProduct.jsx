@@ -78,7 +78,7 @@ const CreateProduct = ({ isOpen, onClose }) => {
             <Dialog open={isOpen} onClose={onClose} className="relative z-40 min-h-[95dvh]">
                 <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
                 <div className="fixed inset-0 flex items-center justify-center p-4">
-                    <Dialog.Panel className="bg-white rounded-lg shadow-lg max-w-5xl w-full mx-auto my-auto max-h-full overflow-y-auto py-4">
+                    <Dialog.Panel className="bg-white rounded-lg shadow-lg max-w-5xl w-full mx-auto my-auto min-h-[90dvh] max-h-full overflow-y-auto py-4">
                         <p className="text-center text-black text-xl font-semibold">
                             Create Product
                         </p>

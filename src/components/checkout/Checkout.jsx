@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import userConfig from '../../appwrite/userConfig'
+import useAddresses from '../../hooks/useAddresses'
 import useAllProducts from '../../hooks/useAllProducts'
 
 const Checkout = () => {
     const { userData } = useSelector((state) => state.auth)
     const { products: allProducts, fetching: productsFetching, error: productsError } = useAllProducts()
     const { products: productIds, fetching, error } = useSelector((state) => state.checkout)
+    const { defaultAddress, fetching: defAdfetching, error: defAddeError } = useAddresses({ userData })
     const [products, setProducts] = useState([])
-    const [defAdd, setDefAdd] = useState({})
 
     useEffect(() => {
-        const getAddress = async () => {
-            const add = await userConfig.getDefaultAddress(userData.$id)
-            setDefAdd(add)
-            console.log(defAdd);
-        }
-        getAddress()
+        // const getAddress = async () => {
+        //     const add = await userConfig.getDefaultAddress(userData.$id)
+        //     if (!add) {
+        //         setDefAdd(add)
+        //     } else {
+
+        //     }
+        //     console.log(defAdd);
+        // }
+        // getAddress()
         const prods = allProducts.filter((product) => productIds.includes(product.$id))
         setProducts(prods)
     }, [allProducts])
@@ -38,11 +42,11 @@ const Checkout = () => {
                         <h2 className="text-xl font-semibold">Shipping Information</h2>
                         <button className="text-blue-500 underline">Edit</button>
                         <div className="flex flex-col text-black">
-                            <p className="">Name: {defAdd.name}</p>
-                            <p className="">Phone: {defAdd.phone}</p>
-                            <p className="">County: {defAdd.county}</p>
-                            <p className="">Town: {defAdd.town}</p>
-                            <p className="">Location: {defAdd.location}</p>
+                            <p className="">Name: {defaultAddress.name}</p>
+                            <p className="">Phone: {defaultAddress.phone}</p>
+                            <p className="">County: {defaultAddress.county}</p>
+                            <p className="">Town: {defaultAddress.town}</p>
+                            <p className="">Location: {defaultAddress.location}</p>
                         </div>
                     </div>
 

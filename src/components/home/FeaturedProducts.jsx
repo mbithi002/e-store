@@ -29,8 +29,8 @@ const FeaturedProducts = () => {
                     featuredProducts.map((product) => (
                         <div key={product.id} className="sm:h-[40dvh] h-[23rem] my-5 sm:w-[10rem] w-[16rem] mx-auto shadow-lg flex flex-col">
                             <div className="h-[30dvh] w-full flex items-center justify-center relative">
-                                {product.new && (
-                                    <div className="absolute top-2 left-2 h-8 w-8 flex items-center justify-center rounded-full bg-black text-white text-xs">
+                                {product.isNew && (
+                                    <div className="shadow-lg absolute -top-2 -left-2 h-8 w-8 flex items-center justify-center rounded-full bg-black text-white text-xs">
                                         New
                                     </div>
                                 )}

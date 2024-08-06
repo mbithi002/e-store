@@ -20,10 +20,12 @@ import ProfileHero from './profile/ProfileHero'
 import Search from './search/Search'
 import ProductCard from './shop/ProductCard'
 import Shop from './shop/Shop'
+import AdminToast from './toasts/AdminToast'
 
 export {
-  Admin as AdminComponent,
-  Cart as CartComponent, Checkout as CheckoutComponent, CustomCheckBox as CustomCheckBoxComponent,
+  Admin as AdminComponent, AdminToast as AdminToastComponent, Cart as CartComponent,
+  Checkout as CheckoutComponent,
+  CustomCheckBox as CustomCheckBoxComponent,
   Footer as FooterComponent,
   Header as HeaderComponent,
   Home as HomeComponent,

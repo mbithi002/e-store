@@ -32,7 +32,7 @@ const UsersComponent = () => {
             <UpdateUser onClose={() => setCreateUserModal(!updateUserModal)} isOpen={updateUserModal} user={editUser} />
             <div className="flex flex-col w-full h-full slide-left">
                 <div className="flex flex-row justify-between mb-2 w-full">
-                    <p className="">All users</p>
+                    <p className="">All users  <span className="text-green-400 font-bold text-xl">{allUsers && allUsers.length}</span></p>
                     <button onClick={() => setCreateUserModal(!createUserModal)} className="bg-green-400 py-1 px-5 rounded-sm self-end">+ Add</button>
                 </div>
                 <table className="table-auto w-full">
@@ -41,7 +41,9 @@ const UsersComponent = () => {
                             <th className='bg-gray-700'>Name</th>
                             <th className='bg-gray-700'>Email</th>
                             <th className='bg-gray-700'>Phone</th>
-                            <th className='bg-gray-700'>Action</th>
+                            <th className='bg-gray-700'>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,8 +53,8 @@ const UsersComponent = () => {
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.name}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.email}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.phone}</td>
-                                    <td className='flex items-center p-1'>
-                                        <button onClick={() => handleEditUser(user)} className="bg-blue-500 w-full h-full text-white rounded-md">Edit</button>
+                                    <td className='flex items-center p-1 text-center w-full h-full'>
+                                        <i className="fa-solid fa-pen-to-square text-white text-xl self-center cursor-pointer hover:text-green-500 transition-all duration-300 mx-auto"></i>
                                     </td>
                                 </tr>
                             ))
