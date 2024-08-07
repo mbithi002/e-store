@@ -99,6 +99,37 @@ class AdminConfig {
       throw error
     }
   }
+
+  async createCategory(category, description) {
+    try {
+      const response = await this.database.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCategoriesCid,
+        ID.unique(),
+        {
+          category,
+          description,
+        }
+      )
+      return response
+    } catch (error) {
+      console.log('adminConfig :: createCategory() :: ', error)
+      throw error
+    }
+  }
+
+  async getCategories() {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteCategoriesCid
+      )
+      return response.documents
+    } catch (error) {
+      console.log('adminConfig :: getCategories() :: ', error)
+      throw error
+    }
+  }
 }
 
 const adminConfig = new AdminConfig()

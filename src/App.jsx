@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from 'react-router-dom';
 import './App.css';
 import { FooterComponent, HeaderComponent } from './components/components';
+import { fetchAllCategories } from "./features/admin/categoryThunks";
 import { fetchAllUsers } from "./features/admin/userThunks";
 import { fetchAddresses } from "./features/user/addresses/addressThunks";
 import { fetchAllproducts } from "./features/user/shop/productThunks";
@@ -14,7 +15,10 @@ const App = () => {
     dispatch(fetchAllproducts())
     if (userData) {
       dispatch(fetchAddresses(userData.$id))
-      if (userData.isAdmin) dispatch(fetchAllUsers())
+      dispatch(fetchAllCategories())
+      if (userData.isAdmin) {
+        dispatch(fetchAllUsers())
+      }
     }
   }, [userData])
   return (

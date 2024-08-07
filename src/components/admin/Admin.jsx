@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { AdminToastComponent } from '../components'
 import AdminsTable from './AdminsTable'
+import Categories from './Categories'
 import ProductsTable from './ProductsTable'
 import UsersComponent from './UsersComponent'
 const Admin = () => {
@@ -30,6 +31,9 @@ const Admin = () => {
                                         <button onClick={() => setContent('users')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
                                             <i className="fa-solid fa-circle-user"></i> Users
                                         </button>
+                                        <button onClick={() => setContent('category')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
+                                            <i className="fa-solid fa-layer-group"></i> Categories
+                                        </button>
                                         <button onClick={() => setContent('orders')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
                                             <i className="fa-solid fa-truck"></i> Orders Management
                                         </button>
@@ -50,6 +54,7 @@ const Admin = () => {
                             {content === 'orders' && (<>orders</>)}
                             {content === 'inventory' && (<>inventory</>)}
                             {content === 'reviews' && (<>Reviews</>)}
+                            {content === 'category' && (<Categories />)}
                         </div>
                     </div>
                 </div>
