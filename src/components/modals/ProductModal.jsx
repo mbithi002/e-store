@@ -1,5 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { addToCart } from '../../features/user/cart/cartUtils';
 
 const ProductModal = ({ isOpen, onClose, product }) => {
@@ -25,11 +26,13 @@ const ProductModal = ({ isOpen, onClose, product }) => {
                         <Dialog.Panel className="bg-white rounded-lg shadow-lg max-w-4xl w-full mx-auto my-auto sm:h-[90dvh]">
                             <div className="flex flex-col lg:flex-row h-full">
                                 <div className="lg:w-1/2 w-full flex justify-center items-center bg-gray-100 p-2">
-                                    <img
-                                        src={product.productImage}
-                                        alt={product.productName}
-                                        className="w-full h-full object-cover hover:object-contain transition-all duration-200 p-4"
-                                    />
+                                    <Link to={`/product/${product.$id}`}>
+                                        <img
+                                            src={product.productImage}
+                                            alt={product.productName}
+                                            className="w-full h-full object-cover hover:object-contain transition-all duration-200 p-4"
+                                        />
+                                    </Link>
                                 </div>
                                 <div className="lg:w-1/2 w-full sm:p-6 p-3 relative">
                                     <h2 className="text-2xl font-semibold mb-2">{product.productName}</h2>
@@ -39,7 +42,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
                                     <div className="flex flex-row gap-4 absolute bottom-2">
                                         <button
                                             onClick={() => handleAddToCart(product.$id)}
-                                            className="px-4 py-2 bg-gray-200 text-black rounded hover:bg-white"
+                                            className="px-4 py-2 bg-gray-200 text-black rounded hover:bg-white active:bg-gray-400"
                                         >
                                             <i class="fa-solid fa-cart-shopping mr-2 text-lg"></i>Add to Cart
                                         </button>

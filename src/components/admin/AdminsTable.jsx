@@ -32,6 +32,7 @@ const AdminsTable = () => {
                 <table className="table-auto w-full">
                     <thead className='border border-white'>
                         <tr>
+                            <th className='bg-gray-700'>#</th>
                             <th className='bg-gray-700'>Admin name</th>
                             <th className='bg-gray-700'>Admin e-mail</th>
                             <th className='bg-gray-700'>Admin phone</th>
@@ -42,8 +43,9 @@ const AdminsTable = () => {
                     </thead>
                     <tbody>
                         {
-                            admins && admins.map((user) => (
+                            admins && admins.map((user, index) => (
                                 <tr key={user.$id} className='text-black'>
+                                    <td className='pl-2 border-x-black border-white border text-white transition-all duration-200'>{index + 1}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.name}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.email}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.phone}</td>

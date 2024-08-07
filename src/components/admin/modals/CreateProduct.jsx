@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import adminConfig from '../../../appwrite/adminConfig';
 import { fetchAllproducts } from '../../../features/user/shop/productThunks';
 import { CustomCheckBoxComponent, InputComponent, SelectComponent, WifiLoaderComponent } from '../../components';
@@ -24,6 +24,7 @@ const CreateProduct = ({ isOpen, onClose }) => {
             newProduct: false,
         }
     });
+    const { categories, fethcing: fetchingCategories, error: categoriesError } = useSelector((state) => state.categories)
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false)
@@ -39,7 +40,6 @@ const CreateProduct = ({ isOpen, onClose }) => {
                 Number(data.price),
                 data.image,
                 data.description,
-                data.category,
                 Number(data.quantity),
                 data.status === 'Active',
                 Number(data.rating),
@@ -129,11 +129,15 @@ const CreateProduct = ({ isOpen, onClose }) => {
                                                 className='w-full text-black focus:bg-blue-300 transition-all duration-150'
                                                 {...register('quantity', { required: true })}
                                             />
-                                            <SelectComponent
-                                                label='Category'
-                                                options={['skin care', 'Body lotion', 'serums']}
-                                                {...register('category', { required: true })}
-                                            />
+                                            <select className='max-h-[2rem]] px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full $'>
+                                                {
+                                                    categories.map((item) => (
+                                                        <option key={item.$id} value={item.category} className='max-h-[3rem bg-green-300]'>
+                                                            {item.category}
+                                                        </option>
+                                                    ))
+                                                }
+                                            </select>
                                             <SelectComponent
                                                 label='Status'
                                                 options={['Active', 'In-active']}

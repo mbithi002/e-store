@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllproducts } from '../features/user/shop/productThunks'
 
-const useRelatedProducts = (categoryId) => {
+const useRelatedProducts = (category) => {
   const dispatch = useDispatch()
   const { products, fetching, error } = useSelector((state) => state.products)
   const [relatedProducts, setRelatedProducts] = useState([])
@@ -14,13 +14,14 @@ const useRelatedProducts = (categoryId) => {
   }, [dispatch, products])
 
   useEffect(() => {
-    if (products && products.length > 0 && categoryId) {
+    if (products && products.length > 0 && category) {
       const relatedProds = products.filter(
-        (prod) => prod && prod.categoryId === categoryId
+        (prod) =>
+          prod && prod.category?.toLowerCase() === category.toLowerCase()
       )
       setRelatedProducts(relatedProds)
     }
-  }, [products, categoryId])
+  }, [products, category])
 
   return { relatedProducts, fetching, error }
 }

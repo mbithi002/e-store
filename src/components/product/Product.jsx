@@ -11,11 +11,9 @@ import ReadOnlyRating from '../shop/ReadOnlyRating';
 const Product = () => {
     const dispatch = useDispatch();
     const { slug } = useParams();
-    console.log(slug);
-
 
     const { product, fetching, error } = useProduct(slug);
-    const { relatedProducts, fetchingRelatedProducts, relatedProductsError } = useRelatedProducts(product?.categoryId);
+    const { relatedProducts, fetchingRelatedProducts, relatedProductsError } = useRelatedProducts(product?.category);
 
 
     const handleAddToCart = (productId) => {

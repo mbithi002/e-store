@@ -38,6 +38,7 @@ const UsersComponent = () => {
                 <table className="table-auto w-full">
                     <thead className='border border-white'>
                         <tr>
+                            <th className='bg-gray-700'>#</th>
                             <th className='bg-gray-700'>Name</th>
                             <th className='bg-gray-700'>Email</th>
                             <th className='bg-gray-700'>Phone</th>
@@ -48,8 +49,9 @@ const UsersComponent = () => {
                     </thead>
                     <tbody>
                         {
-                            allUsers && allUsers.map((user) => (
+                            allUsers && allUsers.map((user, index) => (
                                 <tr key={user.$id} className='text-black'>
+                                    <td className='pl-2 border border-white text-white transition-all duration-200'>{index + 1}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.name}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.email}</td>
                                     <td className='pl-2 border-x-black border bg-gray-200 hover:bg-gray-600 hover:text-white transition-all duration-200'>{user.phone}</td>

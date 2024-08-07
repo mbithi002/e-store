@@ -30,6 +30,7 @@ const ProductsTable = () => {
                 <table className="table-auto w-full">
                     <thead className='border border-white'>
                         <tr>
+                            <th className='bg-gray-700'>#</th>
                             <th className='bg-gray-700'>Name</th>
                             <th className='bg-gray-700'>Image</th>
                             <th className='bg-gray-700'>Price</th>
@@ -46,8 +47,9 @@ const ProductsTable = () => {
                     </thead>
                     <tbody>
                         {
-                            products && products.map((product) => (
+                            products && products.map((product, index) => (
                                 <tr key={product.$id} className='text-black'>
+                                    <td className='hover:bg-gray-500 cursor-pointer pl-2 border-x-black border text-white transition-all duration-200'>{index + 1}</td>
                                     <td className='hover:bg-gray-500 cursor-pointer pl-2 border-x-black border text-white transition-all duration-200'>{product.productName}</td>
                                     <td className='pl-2 border-x-black cursor-pointer border text-white transition-all duration-200'>
                                         <img src={product.productImage} alt="" className="size-[4rem] self-center hover:brightness-[70%] transition-all duration-150" />
