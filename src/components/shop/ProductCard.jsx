@@ -20,7 +20,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
   }
 
   const handleCheckout = (productId) => {
-    if (!status) navigate('/signup')
+    if (!status && userData) navigate('/signup')
     dispatch(checkoutProduct(productId))
     navigate('/checkout')
   }

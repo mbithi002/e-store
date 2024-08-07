@@ -1,10 +1,13 @@
 import { Dialog } from '@headlessui/react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../features/user/cart/cartUtils';
+import { checkoutProduct } from '../../features/user/checkout/checkoutSlice';
 
 const ProductModal = ({ isOpen, onClose, product }) => {
-    // Destructure with default values to handle cases where product might be empty
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {
         productName = 'Product Name',
         image = '',
@@ -17,6 +20,15 @@ const ProductModal = ({ isOpen, onClose, product }) => {
         addToCart(productId)
     }
 
+    const goToProductPage = (id) => {
+        navigate(`/product/${id}`)
+    }
+
+    const handleCheckout = (id) => {
+        dispatch(checkoutProduct(id))
+        navigate('/checkout')
+    }
+
     return (
         <Dialog open={isOpen} onClose={onClose} className="relative z-40 h-[90dvh]">
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
@@ -26,13 +38,12 @@ const ProductModal = ({ isOpen, onClose, product }) => {
                         <Dialog.Panel className="bg-white rounded-lg shadow-lg max-w-4xl w-full mx-auto my-auto sm:h-[90dvh]">
                             <div className="flex flex-col lg:flex-row h-full">
                                 <div className="lg:w-1/2 w-full flex justify-center items-center bg-gray-100 p-2">
-                                    <Link to={`/product/${product.$id}`}>
-                                        <img
-                                            src={product.productImage}
-                                            alt={product.productName}
-                                            className="w-full h-full object-cover hover:object-contain transition-all duration-200 p-4"
-                                        />
-                                    </Link>
+                                    <img
+                                        onClick={() => goToProductPage(product.$id)}
+                                        src={product.productImage}
+                                        alt={product.productName}
+                                        className="w-full h-full object-cover hover:object-contain transition-all duration-200 p-4"
+                                    />
                                 </div>
                                 <div className="lg:w-1/2 w-full sm:p-6 p-3 relative">
                                     <h2 className="text-2xl font-semibold mb-2">{product.productName}</h2>
@@ -46,7 +57,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
                                         >
                                             <i class="fa-solid fa-cart-shopping mr-2 text-lg"></i>Add to Cart
                                         </button>
-                                        <button className="flex items-center justify-center gap-2 px-2 py-1 bg-[#181717] text-white border-none rounded-md outline outline-3 outline-[#181717] outline-offset-[-3px] cursor-pointer transition-colors duration-400 active:bg-transparent active:text-[#181717]">
+                                        <button onClick={() => handleCheckout(product.$id)} className="flex items-center justify-center gap-2 px-2 py-1 bg-[#181717] text-white border-none rounded-md outline outline-3 outline-[#181717] outline-offset-[-3px] cursor-pointer transition-colors duration-400 active:bg-transparent active:text-[#181717]">
                                             <svg viewBox="0 0 16 16" className="bi bi-cart-check h-6 w-6 transition-colors duration-400 active:fill-[#181717]" xmlns="http://www.w3.org/2000/svg" fill="#fff">
                                                 <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
                                                 <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>

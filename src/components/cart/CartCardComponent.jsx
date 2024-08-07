@@ -4,12 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addToCart, clearCart, getCart, getCartItemsWithCounts, getCartSubtotal, initializeCart, removeFromCart } from '../../features/user/cart/cartUtils';
 // import { CustomCheckBoxComponent } from '../components';
+import { useDispatch } from 'react-redux';
+import { checkoutCart } from '../../features/user/checkout/checkoutSlice';
 
 const CartCardComponent = ({ products }) => {
     const navigate = useNavigate()
     const [cart, setCart] = useState([])
     const [cartItems, setCartItems] = useState([]);
     const [subTotals, setSubTotals] = useState(0)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         initializeCart();
@@ -46,6 +49,13 @@ const CartCardComponent = ({ products }) => {
 
     const goToProductPage = (productId) => {
         navigate(`/product/${productId}`)
+    }
+
+    const handleCheckout = () => {
+        dispatch(checkoutCart(cartItems))
+        console.log(cartItems);
+
+        navigate('/checkout')
     }
 
     if (cartItems.length === 0) return (
@@ -88,7 +98,7 @@ const CartCardComponent = ({ products }) => {
             <div className="flex flex-row items-center justify-between p-5 w-full">
                 <div className="flex flex-col">
                     <p className="text-lg mb-2">Cart Subtotals: KSH <span className="border border-[#ff69b4] p-1 rounded-md">{subTotals}</span></p>
-                    <button className="bg-[#ff69b4] p-2 text-white">Proceed to checkout</button>
+                    <button onClick={() => handleCheckout()} className="bg-[#ff69b4] p-2 text-white">Proceed to checkout</button>
                 </div>
                 <button onClick={() => handleClearCart()} className="py-2 px-5 bg-red-400 text-white font-semibold text-lg rounded-md">
                     Clear cart

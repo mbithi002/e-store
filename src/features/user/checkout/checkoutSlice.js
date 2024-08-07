@@ -14,8 +14,11 @@ const checkoutSlice = createSlice({
       state.products = []
       state.products.push(action.payload)
     },
+    checkoutCart: (state, action) => {
+      state.products = action.payload
+    },
   },
 })
 
-export const { checkoutProduct } = checkoutSlice.actions
+export const { checkoutProduct, checkoutCart } = checkoutSlice.actions
 export default checkoutSlice.reducer
