@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../features/user/cart/cartUtils';
 import { checkoutProduct } from '../../features/user/checkout/checkoutSlice';
+import useProduct from '../../hooks/useProduct';
 import ReadOnlyRating from './ReadOnlyRating';
 
 function ProductCard({ id, image = 'image', productName = '', description = '', price = 0, rating = 0, stock = '', inActive = false, isNew = false }) {
   const productId = id;
+  const current = useProduct(productId)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { status, userData } = useSelector((state) => state.auth);
@@ -19,7 +21,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
     addToCart(productId)
   }
 
-  const handleCheckout = (productId) => {
+  const handleCheckout = () => {
     if (!status && userData) navigate('/signup')
     dispatch(checkoutProduct(productId))
     navigate('/checkout')
@@ -54,7 +56,7 @@ function ProductCard({ id, image = 'image', productName = '', description = '', 
           </p>
         </div>
         <div className="shadow-lg bg-white p-2 rounded-md card-footer w-full flex justify-between items-center pt-2.5 border-t border-[#ddd] gap-2 absolute bottom-0 mr-3 ">
-          <button onClick={() => handleCheckout(id)} className="bg-black text-white text-sm py-1 px-2 rounded-md">Buy Now</button>
+          <button onClick={() => handleCheckout()} className="bg-black text-white text-sm py-1 px-2 rounded-md">Buy Now</button>
           <div className="flex flex-col items-start w-1/2">
             <ReadOnlyRating rating={rating} />
           </div>

@@ -52,8 +52,9 @@ const CartCardComponent = ({ products }) => {
     }
 
     const handleCheckout = () => {
-        dispatch(checkoutCart(cartItems))
-        console.log(cartItems);
+        const items = localStorage.getItem('cart')
+        dispatch(checkoutCart(items))
+        console.log(items);
 
         navigate('/checkout')
     }
