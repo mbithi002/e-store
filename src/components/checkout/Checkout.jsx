@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { v4 as uuidV4 } from 'uuid';
+import userConfig from '../../appwrite/userConfig';
 import useAddresses from '../../hooks/useAddresses';
 import useAllProducts from '../../hooks/useAllProducts';
 
@@ -11,11 +13,13 @@ const Checkout = () => {
     const { defaultAddress, fetching: defAdfetching, error: defAddeError } = useAddresses({ userData });
     const [products, setProducts] = useState([]);
     const [totals, setTotals] = useState(0);
-
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
+    const [checkoutError, setCheckoutError] = useState('')
     useEffect(() => {
         if (productIds?.length > 1) {
-            const ids = JSON.parse(productIds);  // Ensure it's parsed to an array
-            console.log(ids);
+            const ids = JSON.parse(productIds);
+            console.log("Checkout IDs>>> ", ids);
 
             const productCounts = ids.reduce((counts, id) => {
                 counts[id] = (counts[id] || 0) + 1;
@@ -43,9 +47,43 @@ const Checkout = () => {
 
     }, [allProducts, productIds]);
 
+
     const handleCheckout = async () => {
-        console.log(products);
+        setCheckoutError('');
+
+        const orderId = uuidV4();
+
+        try {
+            setLoading(true);
+            // Create the order
+            const items = products.map((x) => JSON.stringify(x))
+            console.log(items);
+
+            const response = await userConfig.createOrder(
+                userData.$id,
+                totals,
+                items,
+                defaultAddress.$id,
+                orderId
+            );
+
+            if (response) {
+                for (const item of products) {
+                    await userConfig.createOrderItem(JSON.stringify(item), orderId);
+                }
+                navigate('/orders')
+            } else {
+                setCheckoutError('Failed to process order');
+            }
+
+        } catch (error) {
+            setCheckoutError(error.message);
+        } finally {
+            setLoading(false); // Ensure loading is turned off in both success and failure
+        }
     };
+
+    if (!userData) navigate('/signup')
 
     if (productsFetching) return (
         <div className="">loading</div>
@@ -58,7 +96,10 @@ const Checkout = () => {
         <div className="container mt-[4rem]">
             <div className="p-6 mx-auto bg-white rounded-lg shadow-md">
                 <h1 className="text-2xl font-bold mb-6">Checkout</h1>
-
+                <p className="text-red-500">{checkoutError}</p>
+                {loading && (
+                    <div className="text-blue">Loading...</div>
+                )}
                 <div className="grid sm:grid-cols-3 gap-5">
                     <div className="w-full shadow-lg p-3">
                         <h2 className="text-xl font-semibold">Shipping Information</h2>
@@ -92,10 +133,10 @@ const Checkout = () => {
                 </div>
 
                 <div className="mb-6">
-                    <h2 className="text-xl font-semibold">Product List</h2>
+                    <h2 className="text-xl font-semibold text-center my-3">Product List</h2>
                     <div className='flex flex-row flex-wrap'>
                         {products.map((product) => (
-                            <div key={product.$id} className="mx-2">
+                            <div key={product.$id} className="mx-auto">
                                 <div className="flex flex-col h-[17rem] w-[12rem] p-2 shadow-lg">
                                     <div className="h-[80%]">
                                         <img src={product.productImage} alt="" className='object-cover h-full w-full' />
@@ -109,7 +150,7 @@ const Checkout = () => {
                         ))}
                     </div>
                 </div>
-                <button onClick={handleCheckout} disabled={!defaultAddress} className="bg-blue-500 text-white p-2 rounded w-full">Place Order</button>
+                <button onClick={handleCheckout} disabled={!defaultAddress} className="bg-black/30 text-white p-2 rounded w-full">Place Order</button>
             </div>
         </div>
     );

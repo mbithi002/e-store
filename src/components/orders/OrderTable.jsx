@@ -1,6 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const OrderTable = ({ orderData }) => {
+    const { orders, fetching, error } = useSelector((state) => state.orders)
+    if (orders) (
+        console.log(orders)
+    )
+    if (fetching) return (
+        <div className="mt-[5rem]">Loading...</div>
+    )
+    if (error) return (
+        <div className="mt-[5rem]">{error}</div>
+    )
     return (
         <div className="p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-x-auto mt-[4rem]">
             {orderData.map((order, index) => {

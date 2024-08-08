@@ -6,6 +6,7 @@ import { FooterComponent, HeaderComponent } from './components/components';
 import { fetchAllCategories } from "./features/admin/categoryThunks";
 import { fetchAllUsers } from "./features/admin/userThunks";
 import { fetchAddresses } from "./features/user/addresses/addressThunks";
+import { fetchAllOrders } from "./features/user/orders/ordersThunks";
 import { fetchAllproducts } from "./features/user/shop/productThunks";
 
 const App = () => {
@@ -13,9 +14,11 @@ const App = () => {
   const { userData } = useSelector((state) => state.auth)
   useEffect(() => {
     dispatch(fetchAllproducts())
+    dispatch(fetchAllCategories())
     if (userData) {
       dispatch(fetchAddresses(userData.$id))
       dispatch(fetchAllCategories())
+      dispatch(fetchAllOrders(userData.$id))
       if (userData.isAdmin) {
         dispatch(fetchAllUsers())
       }

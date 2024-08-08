@@ -4,6 +4,7 @@ import usersSlice from '../features/admin/usersSlice'
 import authSlice from '../features/auth/authSlice'
 import addressSlice from '../features/user/addresses/addressesSlice'
 import checkoutSlice from '../features/user/checkout/checkoutSlice'
+import ordersSlice from '../features/user/orders/ordersSlice'
 import productsSlice from '../features/user/shop/productsSlice'
 
 const store = configureStore({
@@ -14,6 +15,7 @@ const store = configureStore({
     checkout: checkoutSlice,
     getUsers: usersSlice,
     categories: categoriesSlice,
+    orders: ordersSlice,
   },
 })
 

@@ -1,11 +1,12 @@
 import { Dialog } from '@headlessui/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../features/user/cart/cartUtils';
 import { checkoutProduct } from '../../features/user/checkout/checkoutSlice';
 
 const ProductModal = ({ isOpen, onClose, product }) => {
+    const { userData } = useSelector((state) => state.auth)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {
@@ -25,8 +26,12 @@ const ProductModal = ({ isOpen, onClose, product }) => {
     }
 
     const handleCheckout = (id) => {
-        dispatch(checkoutProduct(id))
-        navigate('/checkout')
+        if (userData) {
+            dispatch(checkoutProduct(id))
+            navigate('/checkout')
+        } else {
+            navigate('/signup')
+        }
     }
 
     return (
@@ -50,14 +55,14 @@ const ProductModal = ({ isOpen, onClose, product }) => {
                                     <p className="text-lg font-medium text-gray-800 mb-4">Ksh: {product.productPrice}</p>
                                     <p className="text-sm text-gray-500 mb-4">{product.stock}</p>
                                     <p className="text-sm text-gray-700 mb-6">{product.productDescription}</p>
-                                    <div className="flex flex-row gap-4 absolute bottom-2">
+                                    <div className="flex flex-row w-full absolute bottom-2 justify-evenly">
                                         <button
                                             onClick={() => handleAddToCart(product.$id)}
-                                            className="px-4 py-2 bg-gray-200 text-black rounded hover:bg-white active:bg-gray-400"
+                                            className="px-4 py-2 w-1/3 bg-gray-200 text-black rounded hover:bg-white active:bg-gray-400"
                                         >
                                             <i class="fa-solid fa-cart-shopping mr-2 text-lg"></i>Add to Cart
                                         </button>
-                                        <button onClick={() => handleCheckout(product.$id)} className="flex items-center justify-center gap-2 px-2 py-1 bg-[#181717] text-white border-none rounded-md outline outline-3 outline-[#181717] outline-offset-[-3px] cursor-pointer transition-colors duration-400 active:bg-transparent active:text-[#181717]">
+                                        <button onClick={() => handleCheckout(product.$id)} className="flex items-center justify-center gap-2 px-2 py-1 bg-[#181717] text-white border-none rounded-md outline outline-3 outline-[#181717] outline-offset-[-3px] cursor-pointer transition-colors duration-400 active:bg-transparent active:text-[#181717] w-1/3">
                                             <svg viewBox="0 0 16 16" className="bi bi-cart-check h-6 w-6 transition-colors duration-400 active:fill-[#181717]" xmlns="http://www.w3.org/2000/svg" fill="#fff">
                                                 <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
                                                 <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>

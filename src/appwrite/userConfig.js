@@ -133,6 +133,57 @@ class UserConfig {
       throw error
     }
   }
+
+  async createOrder(userId, totalAmount, items, address, orderId) {
+    try {
+      const response = await this.database.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteOrdersCid,
+        orderId,
+        {
+          userId,
+          totalAmount,
+          items,
+          address,
+        }
+      )
+      return response
+    } catch (error) {
+      console.error('OrderService :: createOrder() :: ', error)
+      throw error
+    }
+  }
+
+  async createOrderItem(item, orderId) {
+    try {
+      const response = await this.database.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteOrderItemsCid,
+        ID.unique(),
+        {
+          orderId,
+          item,
+        }
+      )
+      return response
+    } catch (error) {
+      console.error('OrderService :: createOrderItem() :: ', error)
+      throw error
+    }
+  }
+  async getOrders(userId) {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteOrdersCid,
+        [Query.equal('userId', userId)]
+      )
+      return response.documents
+    } catch (error) {
+      console.log('userConfig :: getOrders() :: ', error)
+      throw error
+    }
+  }
 }
 
 const userConfig = new UserConfig()
