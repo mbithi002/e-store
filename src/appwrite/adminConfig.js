@@ -128,6 +128,33 @@ class AdminConfig {
       throw error
     }
   }
+
+  async getOrders() {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteOrdersCid
+      )
+      console.log(response)
+      return response.documents
+    } catch (error) {
+      console.log('adminConfig :: getOrders() :: ', error)
+      throw error
+    }
+  }
+
+  async getAddresses() {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteUserAddressesCid
+      )
+      return response.documents
+    } catch (error) {
+      console.log('adminConfig :: getAddresses() :: ', error)
+      throw error
+    }
+  }
 }
 
 const adminConfig = new AdminConfig()

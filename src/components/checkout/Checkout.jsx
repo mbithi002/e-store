@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
 import userConfig from '../../appwrite/userConfig';
+import { fetchAllOrders } from '../../features/user/orders/ordersThunks';
 import useAddresses from '../../hooks/useAddresses';
 import useAllProducts from '../../hooks/useAllProducts';
 
 const Checkout = () => {
     const { userData } = useSelector((state) => state.auth);
+    const dispatch = useDispatch()
     const { products: allProducts, fetching: productsFetching, error: productsError } = useAllProducts();
     const { products: productIds, fetching, error } = useSelector((state) => state.checkout);
     const { defaultAddress, fetching: defAdfetching, error: defAddeError } = useAddresses({ userData });
@@ -71,6 +73,7 @@ const Checkout = () => {
                 for (const item of products) {
                     await userConfig.createOrderItem(JSON.stringify(item), orderId);
                 }
+                dispatch(fetchAllOrders(userData.$id))
                 navigate('/orders')
             } else {
                 setCheckoutError('Failed to process order');

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AdminToastComponent } from '../components'
 import AdminsTable from './AdminsTable'
 import Categories from './Categories'
+import OrdersTable from './OrdersTable'
 import ProductsTable from './ProductsTable'
 import UsersComponent from './UsersComponent'
 const Admin = () => {
@@ -51,7 +52,7 @@ const Admin = () => {
                             {content === 'users' && (<UsersComponent />)}
                             {content === 'admins' && (<AdminsTable />)}
                             {content === 'product' && (<ProductsTable />)}
-                            {content === 'orders' && (<>orders</>)}
+                            {content === 'orders' && (<OrdersTable />)}
                             {content === 'inventory' && (<>inventory</>)}
                             {content === 'reviews' && (<>Reviews</>)}
                             {content === 'category' && (<Categories />)}
