@@ -19,8 +19,6 @@ const adminOrdersSlice = createSlice({
       })
       .addCase(fetchAdminOrders.fulfilled, (state, action) => {
         state.adminOrders = action.payload
-        console.log(action)
-
         state.error = null
         state.fetching = false
       })

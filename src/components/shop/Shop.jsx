@@ -10,7 +10,7 @@ const Shop = () => {
     const { relatedCategories, fetching: fetchingRelated, error: errorRelated } = useCategorizedProds(category);
 
     useEffect(() => {
-        console.log(relatedCategories);
+        // console.log(relatedCategories);
     }, [relatedCategories]);
 
     if (fetching) return (

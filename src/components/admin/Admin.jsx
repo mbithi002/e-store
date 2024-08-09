@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { AdminToastComponent } from '../components'
 import AdminsTable from './AdminsTable'
 import Categories from './Categories'
+import OrderedItems from './OrderedItems'
 import OrdersTable from './OrdersTable'
 import ProductsTable from './ProductsTable'
 import UsersComponent from './UsersComponent'
+
 const Admin = () => {
     const [content, setContent] = useState('product')
     const [sideBar, setSideBar] = useState(true)
@@ -38,6 +40,9 @@ const Admin = () => {
                                         <button onClick={() => setContent('orders')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
                                             <i className="fa-solid fa-truck"></i> Orders Management
                                         </button>
+                                        <button onClick={() => setContent('orderedItems')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
+                                            <i className="fa-solid fa-truck"></i> Ordered Items
+                                        </button>
                                         <button onClick={() => setContent('inventory')} className="text-start w-full py-2 px-3 bg-gray-100 hover:bg-gray-200 transition-all duration-200 rounded-lg mb-3">
                                             <i class="fa-solid fa-warehouse"></i> Inventory Management
                                         </button>
@@ -53,6 +58,7 @@ const Admin = () => {
                             {content === 'admins' && (<AdminsTable />)}
                             {content === 'product' && (<ProductsTable />)}
                             {content === 'orders' && (<OrdersTable />)}
+                            {content === 'orderedItems' && (<OrderedItems />)}
                             {content === 'inventory' && (<>inventory</>)}
                             {content === 'reviews' && (<>Reviews</>)}
                             {content === 'category' && (<Categories />)}

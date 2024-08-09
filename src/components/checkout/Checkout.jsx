@@ -20,8 +20,8 @@ const Checkout = () => {
     const [checkoutError, setCheckoutError] = useState('')
     useEffect(() => {
         if (productIds?.length > 1) {
-            const ids = JSON.parse(productIds);
-            console.log("Checkout IDs>>> ", ids);
+            const ids = productIds
+            // console.log("Checkout IDs>>> ", ids);
 
             const productCounts = ids.reduce((counts, id) => {
                 counts[id] = (counts[id] || 0) + 1;

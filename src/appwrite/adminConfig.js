@@ -135,7 +135,6 @@ class AdminConfig {
         conf.appwriteDatabaseId,
         conf.appwriteOrdersCid
       )
-      console.log(response)
       return response.documents
     } catch (error) {
       console.log('adminConfig :: getOrders() :: ', error)
@@ -152,6 +151,20 @@ class AdminConfig {
       return response.documents
     } catch (error) {
       console.log('adminConfig :: getAddresses() :: ', error)
+      throw error
+    }
+  }
+  async gotOrderedItems() {
+    try {
+      const response = await this.database.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteOrderItemsCid
+      )
+      console.log(response)
+
+      return response.documents
+    } catch (error) {
+      console.log('adminConfig :: getOrderedItems() :: ', error)
       throw error
     }
   }

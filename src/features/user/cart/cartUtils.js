@@ -1,47 +1,44 @@
-// cartUtils.js
-
 const CART_KEY = 'cart'
 
-// Initialize cart in local storage if it doesn't exist
-export const initializeCart = () => {
+export const initializeCart = (userId) => {
   if (!localStorage.getItem(CART_KEY)) {
-    localStorage.setItem(CART_KEY, JSON.stringify([]))
+    const cartObject = { userId, cart: [] }
+    localStorage.setItem(CART_KEY, JSON.stringify(cartObject))
   }
 }
 
-// Get cart from local storage
-export const getCart = () => {
-  const cart = localStorage.getItem(CART_KEY)
-  return cart ? JSON.parse(cart) : []
+export const getCart = (userId) => {
+  const cartObject = JSON.parse(localStorage.getItem(CART_KEY))
+  if (cartObject && cartObject.userId === userId) {
+    const cart = cartObject.cart.filter((id) => id !== null)
+    return cart
+  }
+  return []
 }
 
-// Save cart to local storage
-export const saveCart = (cart) => {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart))
+export const saveCart = (userId, cart) => {
+  const cartObject = { userId, cart }
+  localStorage.setItem(CART_KEY, JSON.stringify(cartObject))
 }
 
-// Add item to cart
-export const addToCart = (productId) => {
-  const cart = getCart()
+export const addToCart = (userId, productId) => {
+  if (!productId) return
+
+  const cart = getCart(userId)
   cart.push(productId)
-  saveCart(cart)
+  console.log(cart)
+
+  saveCart(userId, cart)
 }
 
-// Remove item from cart
-export const removeFromCart = (productId) => {
-  let cart = getCart()
+export const removeFromCart = (userId, productId) => {
+  let cart = getCart(userId)
   cart = cart.filter((id) => id !== productId)
-  saveCart(cart)
+  saveCart(userId, cart)
 }
 
-// Clear cart
-export const clearCart = () => {
-  localStorage.removeItem(CART_KEY)
-  initializeCart() // Reinitialize the cart after clearing
-}
-
-export const getCartItemsWithCounts = (products) => {
-  const cart = getCart()
+export const getCartItemsWithCounts = (userId, products) => {
+  const cart = getCart(userId)
   const productCounts = cart.reduce((counts, id) => {
     counts[id] = (counts[id] || 0) + 1
     return counts
@@ -56,10 +53,30 @@ export const getCartItemsWithCounts = (products) => {
   return items
 }
 
-export const getCartSubtotal = (products) => {
-  const items = getCartItemsWithCounts(products)
+export const getCartSubtotal = (userId, products) => {
+  const items = getCartItemsWithCounts(userId, products)
   const subtotal = items.reduce((total, item) => {
     return total + item.productPrice * item.count
   }, 0)
   return subtotal
+}
+
+export const clearCart = (userId) => {
+  if (!userId) return
+  const cartObject = { userId, cart: [] }
+  localStorage.setItem(CART_KEY, JSON.stringify(cartObject))
+}
+
+export const cleanCart = (userId) => {
+  const cart = getCart(userId).filter((id) => id !== null)
+  saveCart(userId, cart)
+}
+
+export const removeOneFromCart = (userId, productId) => {
+  let cart = getCart(userId)
+  const index = cart.indexOf(productId)
+  if (index !== -1) {
+    cart.splice(index, 1)
+  }
+  saveCart(userId, cart)
 }

@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import './App.css';
 import { FooterComponent, HeaderComponent } from './components/components';
 import { fetchAllAddress } from "./features/admin/allAddressesThunks";
+import { fetchAllOrderedItems } from "./features/admin/allOrderedItems";
 import { fetchAdminOrders } from "./features/admin/allOrdersThunks";
 import { fetchAllCategories } from "./features/admin/categoryThunks";
 import { fetchAllUsers } from "./features/admin/userThunks";
@@ -25,6 +26,7 @@ const App = () => {
         dispatch(fetchAdminOrders())
         dispatch(fetchAllUsers())
         dispatch(fetchAllAddress())
+        dispatch(fetchAllOrderedItems())
       }
     }
   }, [userData])

@@ -66,8 +66,6 @@ class UserService {
         String(password),
         conf.bcryptSaltRounds
       )
-      console.log(hashedPassword)
-
       const user = await this.database.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteUsersCid,
