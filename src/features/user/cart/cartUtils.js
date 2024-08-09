@@ -1,14 +1,20 @@
-const CART_KEY = 'cart'
+const CART_KEY = 'cart_' // Updated base cart key
+
+// Helper function to get the cart key for a specific user
+const getCartKey = (userId) => `${CART_KEY}${userId}`
 
 export const initializeCart = (userId) => {
-  if (!localStorage.getItem(CART_KEY)) {
+  if (!userId) return
+  const cartKey = getCartKey(userId)
+  if (!localStorage.getItem(cartKey)) {
     const cartObject = { userId, cart: [] }
-    localStorage.setItem(CART_KEY, JSON.stringify(cartObject))
+    localStorage.setItem(cartKey, JSON.stringify(cartObject))
   }
 }
 
 export const getCart = (userId) => {
-  const cartObject = JSON.parse(localStorage.getItem(CART_KEY))
+  const cartKey = getCartKey(userId)
+  const cartObject = JSON.parse(localStorage.getItem(cartKey))
   if (cartObject && cartObject.userId === userId) {
     const cart = cartObject.cart.filter((id) => id !== null)
     return cart
@@ -17,8 +23,9 @@ export const getCart = (userId) => {
 }
 
 export const saveCart = (userId, cart) => {
+  const cartKey = getCartKey(userId)
   const cartObject = { userId, cart }
-  localStorage.setItem(CART_KEY, JSON.stringify(cartObject))
+  localStorage.setItem(cartKey, JSON.stringify(cartObject))
 }
 
 export const addToCart = (userId, productId) => {
@@ -26,8 +33,6 @@ export const addToCart = (userId, productId) => {
 
   const cart = getCart(userId)
   cart.push(productId)
-  console.log(cart)
-
   saveCart(userId, cart)
 }
 
@@ -63,11 +68,13 @@ export const getCartSubtotal = (userId, products) => {
 
 export const clearCart = (userId) => {
   if (!userId) return
+  const cartKey = getCartKey(userId)
   const cartObject = { userId, cart: [] }
-  localStorage.setItem(CART_KEY, JSON.stringify(cartObject))
+  localStorage.setItem(cartKey, JSON.stringify(cartObject))
 }
 
 export const cleanCart = (userId) => {
+  const cartKey = getCartKey(userId)
   const cart = getCart(userId).filter((id) => id !== null)
   saveCart(userId, cart)
 }
